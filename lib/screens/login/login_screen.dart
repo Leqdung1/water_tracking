@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
 
+import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
+import '../../i18n/strings.g.dart';
+import '../../widgets/form/app_text_field.dart';
 import '../register/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   late final LoginCubit loginCubit;
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -58,166 +62,133 @@ class _LoginScreenState extends State<LoginScreen> {
               body: SafeArea(
                 child: Center(
                   child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.android,
-                          size: 100,
-                        ),
-                        const SizedBox(
-                          height: 75,
-                        ),
-                        const Text(
-                          'Hello',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Welcome back',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-
-                        // Email textfield
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 25,
-                          ),
-                          child: TextField(
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.blue,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              hintText: 'Email',
-                              fillColor: Colors.grey[200],
-                              filled: true,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Gap(10),
+                          Text(
+                            t.core.createAccountToTrack,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-
-                        // Password textfield
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 25,
-                          ),
-                          child: TextField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.blue,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              hintText: 'Password',
-                              fillColor: Colors.grey[200],
-                              filled: true,
+                          const Gap(10),
+                          // Email textfield
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 25,
                             ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-
-                        // Sign in
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 25,
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurple,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                loginCubit.login(
-                                  _emailController.text.trim(),
-                                  _passwordController.text.trim(),
-                                );
+                            child: AppTextField(
+                              controller: _emailController,
+                              hintText: t.core.email,
+                              prefixIcon: const Icon(Icons.email),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Email is required';
+                                }
+                                final emailRegex = RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                                if (!emailRegex.hasMatch(value)) {
+                                  return 'Invalid email';
+                                }
+                                return null;
                               },
-                              child: state.status == BlocStatus.loading
-                                  ? const Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : const Center(
-                                      child: Text(
-                                        'Sign in',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                            ),
+                          ),
+                          const Gap(10),
+
+                          // Password textfield
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 25,
+                            ),
+                            child: AppTextField(
+                              controller: _passwordController,
+                              hintText: t.core.password,
+                              prefixIcon: const Icon(Icons.lock),
+                              obscureText: true,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+                          // Sign in
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 25,
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: AppThemeConst.primaryColor,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    loginCubit.login(
+                                      _emailController.text.trim(),
+                                      _passwordController.text.trim(),
+                                    );
+                                  }
+                                },
+                                child: state.status == BlocStatus.loading
+                                    ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          t.core.login,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ),
-                                    ),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
+                          const SizedBox(
+                            height: 25,
+                          ),
 
-                        // Register
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Don\'t have an account?',
-                              style: TextStyle(
-                                color: Colors.black54,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                ' Register',
+                          // Register
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                t.core.dontHaveAccount,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepPurple,
+                                  color: Colors.black54,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  t.core.register,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.deepPurple,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

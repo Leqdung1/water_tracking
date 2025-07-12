@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:water_tracking/core/observer/bloc_observer.dart';
+import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
 import 'package:water_tracking/screens/login/login_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
@@ -10,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
+  runApp(TranslationProvider(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,9 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        locale: TranslationProvider.of(context).flutterLocale, 
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          scaffoldBackgroundColor: Colors.white,
         ),
         initialRoute: '/login',
         routes: {

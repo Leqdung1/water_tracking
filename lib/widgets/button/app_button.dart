@@ -13,6 +13,7 @@ class AppButton extends StatelessWidget {
   final double? borderRadius;
   final Color? textColor;
   final EdgeInsets? padding;
+  final EdgeInsets? margin;
   const AppButton({
     super.key,
     this.color,
@@ -23,11 +24,13 @@ class AppButton extends StatelessWidget {
     this.borderRadius,
     this.textColor,
     this.padding,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       padding: padding ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       width: width,
       height: height,
