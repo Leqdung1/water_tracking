@@ -6,6 +6,7 @@ import 'package:water_tracking/core/observer/bloc_observer.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
 import 'package:water_tracking/screens/login/login_screen.dart';
+import 'package:water_tracking/screens/main/main_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
 
 void main() async {
@@ -21,12 +22,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        locale: TranslationProvider.of(context).flutterLocale, 
+        locale: TranslationProvider.of(context).flutterLocale,
         supportedLocales: AppLocaleUtils.supportedLocales,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         title: 'Flutter Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+          ),
         ),
         initialRoute: '/login',
         routes: {
@@ -35,6 +39,7 @@ class MyApp extends StatelessWidget {
                 create: (context) => LoginCubit(),
                 child: const LoginScreen(),
               ),
+          '/main': (context) => const MainScreen(),
         });
   }
 }

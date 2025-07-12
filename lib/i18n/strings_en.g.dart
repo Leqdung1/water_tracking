@@ -60,6 +60,8 @@ class TranslationsCoreEn {
 	String get dontHaveAccount => 'Don\'t have an account';
 	String get loginSuccess => 'Login successfully';
 	String get createAccountToTrack => 'Create an account to track your water intake, set reminders, and unlock achievements';
+	String get signUp => 'Sign Up...';
+	String get emailIsRequired => 'Email is required';
 }
 
 /// Flat map(s) containing all translations.
@@ -78,6 +80,8 @@ extension on Translations {
 			case 'core.dontHaveAccount': return 'Don\'t have an account';
 			case 'core.loginSuccess': return 'Login successfully';
 			case 'core.createAccountToTrack': return 'Create an account to track your water intake, set reminders, and unlock achievements';
+			case 'core.signUp': return 'Sign Up...';
+			case 'core.emailIsRequired': return 'Email is required';
 			default: return null;
 		}
 	}

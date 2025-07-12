@@ -37,11 +37,11 @@ class _AppTextFieldState extends State<AppTextField> {
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
         hintText: widget.hintText,
-        fillColor: Colors.grey[200],
+        fillColor: const Color.fromARGB(255, 241, 241, 241),
         filled: true,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Colors.white,
+            color: Color.fromARGB(255, 255, 252, 252),
           ),
           borderRadius: BorderRadius.circular(12),
         ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
+import 'package:water_tracking/core/extensions/theme_extension.dart';
+import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/screens/register/cubit/register_cubit.dart';
-import 'package:water_tracking/screens/splash/splash_screen.dart';
-
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
 import '../../widgets/form/app_text_field.dart';
+import '../login/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({
@@ -22,6 +22,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   late final RegisterCubit registerCubit;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -34,6 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -49,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SplashScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
               );
             }
@@ -87,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               prefixIcon: const Icon(Icons.email),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Email is required';
+                                  return t.core.emailIsRequired;
                                 }
                                 final emailRegex = RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -114,13 +116,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           const Gap(10),
 
-                          // Password textfield
+                          // Password confirm
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 25,
                             ),
                             child: AppTextField(
-                              controller: _passwordController,
+                              controller: _confirmPasswordController,
                               hintText: t.core.confirmPassword,
                               prefixIcon: const Icon(Icons.lock),
                               obscureText: true,
@@ -140,27 +142,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  // if (_formKey.currentState!.validate()) {
-                                  //   loginCubit.login(
-                                  //     _emailController.text.trim(),
-                                  //     _passwordController.text.trim(),
-                                  //   );
-                                  // }
+                                  if (_formKey.currentState!.validate()) {
+                                    registerCubit.register(
+                                      _emailController.text.trim(),
+                                      _passwordController.text.trim(),
+                                      _confirmPasswordController.text.trim(),
+                                    );
+                                  }
                                 },
-                                child: state.status == BlocStatus.loading
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : Center(
-                                        child: Text(
-                                          t.core.login,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
+                                child: Center(
+                                  child: Text(
+                                    t.core.register,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -180,13 +179,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  LocaleSettings.setLocale(AppLocale.vi);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   " ${t.core.login}",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.deepPurple,
+                                  style: context.textTheme.body17.copyWith(
+                                    color: AppThemeConst.primaryColor,
                                   ),
                                 ),
                               ),

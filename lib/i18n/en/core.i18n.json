@@ -9,5 +9,7 @@
     "alreadyHaveAccount": "Already have an account",
     "dontHaveAccount": "Don't have an account",
     "loginSuccess": "Login successfully", 
-    "createAccountToTrack": "Create an account to track your water intake, set reminders, and unlock achievements"
+    "createAccountToTrack": "Create an account to track your water intake, set reminders, and unlock achievements", 
+    "signUp": "Sign Up...", 
+    "emailIsRequired": "Email is required"
 }
