@@ -7,6 +7,8 @@ import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
 import 'package:water_tracking/screens/login/login_screen.dart';
 import 'package:water_tracking/screens/main/main_screen.dart';
+import 'package:water_tracking/screens/register/cubit/register_cubit.dart';
+import 'package:water_tracking/screens/register/register_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
 
 void main() async {
@@ -40,6 +42,10 @@ class MyApp extends StatelessWidget {
                 child: const LoginScreen(),
               ),
           '/main': (context) => const MainScreen(),
+          '/register': (context) => BlocProvider(
+                create: (context) => RegisterCubit(),
+                child: const RegisterScreen(),
+              ),
         });
   }
 }

@@ -30,6 +30,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: widget.obscureText,
