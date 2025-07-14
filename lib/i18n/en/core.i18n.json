@@ -16,5 +16,8 @@
     "history": "History",
     "report": "Report",
     "setting": "Setting", 
-    "logout": "Logout"
+    "logout": "Logout", 
+    "drink_n_mL": "Drink (${n} mL)", 
+    "view_all": "View All", 
+    "no_history_today": "You have no history of water intake today"
 }

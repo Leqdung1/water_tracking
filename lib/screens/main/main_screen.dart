@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:water_tracking/core/extensions/theme_extension.dart';
+import 'package:water_tracking/core/style/text_style.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
@@ -102,10 +104,10 @@ class _MainScreenState extends State<MainScreen>
                     const Gap(4),
                     Text(
                       tabData['label'] as String,
-                      style: TextStyle(
-                        color: color,
-                        fontWeight:
-                            isActive ? FontWeight.bold : FontWeight.normal,
+                      style: context.textTheme.body15.copyWith(
+                        color: isActive
+                            ? AppThemeConst.primaryColor
+                            : AppThemeConst.neutralColor2,
                       ),
                     ),
                   ],

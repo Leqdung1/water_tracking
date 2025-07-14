@@ -67,6 +67,9 @@ class TranslationsCoreEn {
 	String get report => 'Report';
 	String get setting => 'Setting';
 	String get logout => 'Logout';
+	String drink_n_mL({required Object n}) => 'Drink (${n} mL)';
+	String get view_all => 'View All';
+	String get no_history_today => 'You have no history of water intake today';
 }
 
 /// Flat map(s) containing all translations.
@@ -92,6 +95,9 @@ extension on Translations {
 			case 'core.report': return 'Report';
 			case 'core.setting': return 'Setting';
 			case 'core.logout': return 'Logout';
+			case 'core.drink_n_mL': return ({required Object n}) => 'Drink (${n} mL)';
+			case 'core.view_all': return 'View All';
+			case 'core.no_history_today': return 'You have no history of water intake today';
 			default: return null;
 		}
 	}
