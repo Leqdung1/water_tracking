@@ -4,14 +4,13 @@ import 'package:gap/gap.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
-import 'package:water_tracking/screens/splash/splash_screen.dart';
-
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
 import '../../widgets/dialog/loading_dialog.dart';
 import '../../widgets/form/app_text_field.dart';
 import '../forgot_password/forgot_password.dart';
+import '../main/main_screen.dart';
 import '../register/cubit/register_cubit.dart';
 import '../register/register_screen.dart';
 
@@ -49,10 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state.status == BlocStatus.success) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const SplashScreen(),
+                builder: (context) => const MainScreen(),
               ),
             );
           }
