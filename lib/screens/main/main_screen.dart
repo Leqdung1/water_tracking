@@ -1,8 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-
+import 'package:gap/gap.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
+import '../../i18n/strings.g.dart';
 import '../history/history_screen.dart';
 import '../home/home_screen.dart';
 import '../report/report_screen.dart';
@@ -19,7 +19,6 @@ class _MainScreenState extends State<MainScreen>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final TabController tabController;
   int tabIndex = 0;
-  int previousTabIndex = 0;
 
   @override
   void initState() {
@@ -29,24 +28,6 @@ class _MainScreenState extends State<MainScreen>
   }
 
   void onTabChanged(int index) {
-    if (index == MainTab.home.index) {
-      previousTabIndex = tabIndex;
-
-      setState(() {
-        tabIndex = previousTabIndex;
-        tabController.animateTo(tabIndex);
-      });
-      return;
-    }
-    if (index == MainTab.history.index) {
-      previousTabIndex = tabIndex;
-
-      setState(() {
-        tabIndex = previousTabIndex;
-        tabController.animateTo(tabIndex);
-      });
-      return;
-    }
     setState(() {
       tabIndex = index;
       tabController.animateTo(index);
@@ -91,22 +72,22 @@ class _MainScreenState extends State<MainScreen>
               {
                 'tab': MainTab.home,
                 'icon': Icons.home,
-                'label': 'Home',
+                'label': t.core.home,
               },
               {
                 'tab': MainTab.history,
                 'icon': Icons.history,
-                'label': 'History',
+                'label': t.core.history,
               },
               {
                 'tab': MainTab.report,
                 'icon': Icons.insert_chart,
-                'label': 'Report',
+                'label': t.core.report,
               },
               {
                 'tab': MainTab.setting,
                 'icon': Icons.settings,
-                'label': 'Setting',
+                'label': t.core.setting,
               },
             ].map((tabData) {
               final tab = tabData['tab'] as MainTab;
@@ -118,7 +99,7 @@ class _MainScreenState extends State<MainScreen>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(tabData['icon'] as IconData, color: color),
-                    const SizedBox(height: 4),
+                    const Gap(4),
                     Text(
                       tabData['label'] as String,
                       style: TextStyle(

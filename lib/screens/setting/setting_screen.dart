@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../i18n/strings.g.dart';
 import '../login/login_screen.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -26,8 +27,8 @@ class SettingScreen extends StatelessWidget {
                 ),
               );
             },
-            title: const Text(
-              'Đăng xuất',
+            title: Text(
+              t.core.logout,
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 16,

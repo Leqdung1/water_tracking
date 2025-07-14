@@ -62,6 +62,11 @@ class TranslationsCoreEn {
 	String get createAccountToTrack => 'Create an account to track your water intake, set reminders, and unlock achievements';
 	String get signUp => 'Sign Up...';
 	String get emailIsRequired => 'Email is required';
+	String get home => 'Home';
+	String get history => 'History';
+	String get report => 'Report';
+	String get setting => 'Setting';
+	String get logout => 'Logout';
 }
 
 /// Flat map(s) containing all translations.
@@ -82,6 +87,11 @@ extension on Translations {
 			case 'core.createAccountToTrack': return 'Create an account to track your water intake, set reminders, and unlock achievements';
 			case 'core.signUp': return 'Sign Up...';
 			case 'core.emailIsRequired': return 'Email is required';
+			case 'core.home': return 'Home';
+			case 'core.history': return 'History';
+			case 'core.report': return 'Report';
+			case 'core.setting': return 'Setting';
+			case 'core.logout': return 'Logout';
 			default: return null;
 		}
 	}

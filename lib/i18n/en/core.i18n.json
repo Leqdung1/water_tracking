@@ -11,5 +11,10 @@
     "loginSuccess": "Login successfully", 
     "createAccountToTrack": "Create an account to track your water intake, set reminders, and unlock achievements", 
     "signUp": "Sign Up...", 
-    "emailIsRequired": "Email is required"
+    "emailIsRequired": "Email is required", 
+    "home": "Home",
+    "history": "History",
+    "report": "Report",
+    "setting": "Setting", 
+    "logout": "Logout"
 }
