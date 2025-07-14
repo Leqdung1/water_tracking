@@ -14,6 +14,7 @@ import 'package:water_tracking/screens/register/register_screen.dart';
 import 'package:water_tracking/screens/report/report_screen.dart';
 import 'package:water_tracking/screens/setting/setting_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
+import 'package:water_tracking/screens/switch_cup_size/switch_cup_size_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
           '/history': (context) => const HistoryScreen(),
           '/report': (context) => const ReportScreen(),
           '/setting': (context) => const SettingScreen(),
+          '/switch_cup_size': (context) => const SwitchCupSizeScreen(),
         });
   }
 }

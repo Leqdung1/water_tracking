@@ -19,5 +19,6 @@
     "logout": "Logout", 
     "drink_n_mL": "Drink (${n} mL)", 
     "view_all": "View All", 
-    "no_history_today": "You have no history of water intake today"
+    "no_history_today": "You have no history of water intake today", 
+    "switch_cup_size": "Switch Cup Size"
 }
