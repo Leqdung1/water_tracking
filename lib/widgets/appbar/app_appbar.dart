@@ -7,14 +7,16 @@ import '../../core/constants/app_theme_const.dart';
 import '../../core/constants/asset_path_const.dart';
 
 class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const AppAppbar({super.key, required this.title});
+  const AppAppbar({super.key, required this.title, this.backgroundColor});
   final String title;
+  final Color? backgroundColor;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: backgroundColor ?? Colors.transparent,
       leading: Center(
         child: SizedBox(
           width: 24,

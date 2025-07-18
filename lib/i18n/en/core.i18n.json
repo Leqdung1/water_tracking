@@ -38,6 +38,26 @@
     "smoothie": "Smoothie",
     "soda": "Soda",
     "tea": "Tea",
-    "wine": "Wine"
-
+    "wine": "Wine",
+    "today": "Today", 
+    "yesterday": "Yesterday", 
+    "january": "January", 
+    "february": "February", 
+    "march": "March", 
+    "april": "April", 
+    "may": "May", 
+    "june": "June", 
+    "july": "July", 
+    "august": "August", 
+    "september": "September", 
+    "october": "October", 
+    "november": "November", 
+    "december": "December", 
+    "editWaterIntake": "Edit Water Intake", 
+    "cancel": "Cancel",
+    "save": "Save", 
+    "ok": "OK" , 
+    "back": "Back", 
+    "setDate": "Set Date", 
+    "setHour": "Set Hour"
 }

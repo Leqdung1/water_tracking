@@ -113,3 +113,51 @@ enum TypeDrink {
     wine => t.core.wine,
   };
 }
+
+
+enum Month {
+  january,
+  february,
+  march,
+  april,
+  may,
+  june,
+  july,
+  august,
+  september,
+  october,
+  november,
+  december;
+
+
+  String get name => switch (this) {
+    january => t.core.january,
+    february => t.core.february,
+    march => t.core.march,
+    april => t.core.april,
+    may => t.core.may,
+    june => t.core.june,
+    july => t.core.july,
+    august => t.core.august,
+    september => t.core.september,
+    october => t.core.october,
+    november => t.core.november,
+    december => t.core.december,
+  };
+
+
+  String get monthNumber => switch (this) {
+    january => '1',
+    february => '2',
+    march => '3',
+    april => '4',
+    may => '5',
+    june => '6',
+    july => '7',
+    august => '8',
+    september => '9',
+    october => '10',
+    november => '11',
+    december => '12',
+  };
+}

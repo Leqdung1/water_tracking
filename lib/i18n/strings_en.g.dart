@@ -89,6 +89,27 @@ class TranslationsCoreEn {
 	String get soda => 'Soda';
 	String get tea => 'Tea';
 	String get wine => 'Wine';
+	String get today => 'Today';
+	String get yesterday => 'Yesterday';
+	String get january => 'January';
+	String get february => 'February';
+	String get march => 'March';
+	String get april => 'April';
+	String get may => 'May';
+	String get june => 'June';
+	String get july => 'July';
+	String get august => 'August';
+	String get september => 'September';
+	String get october => 'October';
+	String get november => 'November';
+	String get december => 'December';
+	String get editWaterIntake => 'Edit Water Intake';
+	String get cancel => 'Cancel';
+	String get save => 'Save';
+	String get ok => 'OK';
+	String get back => 'Back';
+	String get setDate => 'Set Date';
+	String get setHour => 'Set Hour';
 }
 
 /// Flat map(s) containing all translations.
@@ -136,6 +157,27 @@ extension on Translations {
 			case 'core.soda': return 'Soda';
 			case 'core.tea': return 'Tea';
 			case 'core.wine': return 'Wine';
+			case 'core.today': return 'Today';
+			case 'core.yesterday': return 'Yesterday';
+			case 'core.january': return 'January';
+			case 'core.february': return 'February';
+			case 'core.march': return 'March';
+			case 'core.april': return 'April';
+			case 'core.may': return 'May';
+			case 'core.june': return 'June';
+			case 'core.july': return 'July';
+			case 'core.august': return 'August';
+			case 'core.september': return 'September';
+			case 'core.october': return 'October';
+			case 'core.november': return 'November';
+			case 'core.december': return 'December';
+			case 'core.editWaterIntake': return 'Edit Water Intake';
+			case 'core.cancel': return 'Cancel';
+			case 'core.save': return 'Save';
+			case 'core.ok': return 'OK';
+			case 'core.back': return 'Back';
+			case 'core.setDate': return 'Set Date';
+			case 'core.setHour': return 'Set Hour';
 			default: return null;
 		}
 	}

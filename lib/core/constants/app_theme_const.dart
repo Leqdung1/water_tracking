@@ -7,4 +7,5 @@ class AppThemeConst {
   static const Color neutralColor = Color(0xFFBFBFBF);
   static const Color neutralColor1 = Color(0xFF262626);
   static const Color neutralColor2 = Color(0xFF808080);
+  static const Color neutralColor3 = Color.fromARGB(255, 255, 255, 255);
 }

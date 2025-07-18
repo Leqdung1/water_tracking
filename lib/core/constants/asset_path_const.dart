@@ -1,16 +1,17 @@
 class AssetPathConst {
 // ------------------------- Icons ------------------------- //
   static const String icDropdown = 'assets/icons/ic_droplet.svg';
-  static const String icBeer = 'assets/icons/ic_beer.svg';
-  static const String icCarbon = 'assets/icons/ic_carbon.svg';
-  static const String icCoconute = 'assets/icons/ic_coconute.svg';
-  static const String icCoffee = 'assets/icons/ic_coffee.svg';
-  static const String icJuice = 'assets/icons/ic_juice.svg';
-  static const String icLiquor = 'assets/icons/ic_liquor.svg';
-  static const String icSmoothie = 'assets/icons/ic_smoothie.svg';
-  static const String icSoda = 'assets/icons/ic_soda.svg';
-  static const String icTea = 'assets/icons/ic_tea.svg';
-  static const String icWine = 'assets/icons/ic_wine.svg';
+  static const String icBeer = 'assets/icons/ic_beer.png';
+  static const String icCarbon = 'assets/icons/ic_carbon.png';
+  static const String icCoconute = 'assets/icons/ic_coconute.png';
+  static const String icCoffee = 'assets/icons/ic_coffee.png';
+  static const String icJuice = 'assets/icons/ic_juice.png';
+  static const String icLiquor = 'assets/icons/ic_liquor.png';
+  static const String icSmoothie = 'assets/icons/ic_smoothie.png';
+  static const String icSoda = 'assets/icons/ic_soda.png';
+  static const String icTea = 'assets/icons/ic_tea.png';
+  static const String icWine = 'assets/icons/ic_wine.png';
+  static const String icEditText = 'assets/icons/ic_edit_text.png';
 
 // ------------------------- Images ------------------------- //
   static const String imgClipboard = 'assets/images/img_clipboard.png';
