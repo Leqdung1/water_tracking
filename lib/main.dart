@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:water_tracking/core/constants/app_theme_const.dart';
 import 'package:water_tracking/core/observer/bloc_observer.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/history/history_screen.dart';
@@ -35,9 +36,9 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         title: 'Flutter Demo',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: AppThemeConst.backgroundColor,
           appBarTheme: AppBarTheme(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
           ),
         ),
         initialRoute: '/main',

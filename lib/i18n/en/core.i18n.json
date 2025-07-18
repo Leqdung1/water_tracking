@@ -20,5 +20,24 @@
     "drink_n_mL": "Drink (${n} mL)", 
     "view_all": "View All", 
     "no_history_today": "You have no history of water intake today", 
-    "switch_cup_size": "Switch Cup Size"
+    "switch_cup_size": "Switch Cup Size",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday", 
+    "orDrink": "Or Drink", 
+    "beer": "Beer",
+    "carbon": "Carbon",
+    "coconute": "Coconute",
+    "coffee": "Coffee",
+    "juice": "Juice",
+    "liquor": "Liquor",
+    "smoothie": "Smoothie",
+    "soda": "Soda",
+    "tea": "Tea",
+    "wine": "Wine"
+
 }

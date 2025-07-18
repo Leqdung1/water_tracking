@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
-import 'package:water_tracking/core/enum/app_enum.dart';
+import 'package:water_tracking/screens/switch_cup_size/widgets/list_type_drink.dart';
+import 'package:water_tracking/screens/switch_cup_size/widgets/list_volume_glass.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../i18n/strings.g.dart';
 
@@ -11,60 +13,41 @@ class SwitchCupSizeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.close),
-          ),
-          title: Text(
-            t.core.switch_cup_size,
-            style: context.textTheme.titleAppBar,
-          ),
-          centerTitle: true,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.close),
         ),
-        body: SizedBox(
-          width: double.infinity,
-          child: Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            runAlignment: WrapAlignment.center,
-            children: CupSize.values
-                .map((e) => _buildCupSizeItem(context, e, e.imagePath))
-                .toList(),
-          ),
-        ));
-  }
-
-  Widget _buildCupSizeItem(
-      BuildContext context, CupSize cupSize, String iconPath) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            border: Border.all(
-              width: 0.3,
-              color: AppThemeConst.neutralColor2,
+        title: Text(
+          t.core.switch_cup_size,
+          style: context.textTheme.titleAppBar,
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Column(
+          children: [
+            ListVolumeGlass(),
+            Row(
+              children: [
+                Text(t.core.orDrink),
+                Gap(8),
+                Container(
+                  width: double.infinity,
+                  height: 0.5,
+                  color: AppThemeConst.neutralColor2,
+                ),
+              ],
             ),
-          ),
-          child: Image.asset(
-            iconPath,
-            width: 36,
-            height: 36,
-          ),
+            Gap(16),
+            ListTypeDrink(),
+          ],
         ),
-        Text(
-          cupSize.name,
-          style: context.textTheme.body15.copyWith(
-            color: AppThemeConst.neutralColor1,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

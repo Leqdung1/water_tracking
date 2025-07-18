@@ -71,6 +71,24 @@ class TranslationsCoreEn {
 	String get view_all => 'View All';
 	String get no_history_today => 'You have no history of water intake today';
 	String get switch_cup_size => 'Switch Cup Size';
+	String get monday => 'Monday';
+	String get tuesday => 'Tuesday';
+	String get wednesday => 'Wednesday';
+	String get thursday => 'Thursday';
+	String get friday => 'Friday';
+	String get saturday => 'Saturday';
+	String get sunday => 'Sunday';
+	String get orDrink => 'Or Drink';
+	String get beer => 'Beer';
+	String get carbon => 'Carbon';
+	String get coconute => 'Coconute';
+	String get coffee => 'Coffee';
+	String get juice => 'Juice';
+	String get liquor => 'Liquor';
+	String get smoothie => 'Smoothie';
+	String get soda => 'Soda';
+	String get tea => 'Tea';
+	String get wine => 'Wine';
 }
 
 /// Flat map(s) containing all translations.
@@ -100,6 +118,24 @@ extension on Translations {
 			case 'core.view_all': return 'View All';
 			case 'core.no_history_today': return 'You have no history of water intake today';
 			case 'core.switch_cup_size': return 'Switch Cup Size';
+			case 'core.monday': return 'Monday';
+			case 'core.tuesday': return 'Tuesday';
+			case 'core.wednesday': return 'Wednesday';
+			case 'core.thursday': return 'Thursday';
+			case 'core.friday': return 'Friday';
+			case 'core.saturday': return 'Saturday';
+			case 'core.sunday': return 'Sunday';
+			case 'core.orDrink': return 'Or Drink';
+			case 'core.beer': return 'Beer';
+			case 'core.carbon': return 'Carbon';
+			case 'core.coconute': return 'Coconute';
+			case 'core.coffee': return 'Coffee';
+			case 'core.juice': return 'Juice';
+			case 'core.liquor': return 'Liquor';
+			case 'core.smoothie': return 'Smoothie';
+			case 'core.soda': return 'Soda';
+			case 'core.tea': return 'Tea';
+			case 'core.wine': return 'Wine';
 			default: return null;
 		}
 	}

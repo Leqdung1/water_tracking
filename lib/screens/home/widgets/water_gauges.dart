@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:water_tracking/screens/home/widgets/cup_type.dart';
 import 'package:water_tracking/widgets/button/app_button.dart';
 
@@ -20,6 +21,17 @@ class WaterGauges extends StatelessWidget {
         children: [
           _buildWaterGauge(),
           const Gap(24),
+          RadialGauge(
+            track: RadialTrack(
+              start: 0,
+              end: 100,
+            ),
+            needlePointer: [
+              NeedlePointer(
+                value: 80,
+              ),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
