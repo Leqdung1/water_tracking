@@ -34,8 +34,9 @@ class AppBottomSheet extends StatelessWidget {
           topRight: Radius.circular(12),
         ),
       ),
-      alignment: Alignment.center,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // ------------------------------------ Header ------------------------------------ //
           Gap(16),
@@ -70,7 +71,7 @@ class AppBottomSheet extends StatelessWidget {
             thickness: 0.7,
             color: AppThemeConst.neutralColor,
           ),
-          const Spacer(),
+          Gap(32),
           // ------------------------------------ Button ------------------------------------ //
           SafeArea(
             child: Row(
