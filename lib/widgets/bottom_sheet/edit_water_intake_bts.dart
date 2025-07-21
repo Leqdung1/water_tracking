@@ -4,7 +4,9 @@ import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/widgets/bottom_sheet/app_bottom_sheet.dart';
 import 'package:water_tracking/widgets/bottom_sheet/set_date_bts.dart';
+import 'package:water_tracking/widgets/bottom_sheet/set_hour_bts.dart';
 import 'package:water_tracking/widgets/form/app_text_field.dart';
+import 'package:water_tracking/widgets/picker/hour_picker.dart';
 
 import '../../core/constants/app_theme_const.dart';
 import '../../core/constants/asset_path_const.dart';
@@ -67,7 +69,10 @@ class _EditWaterIntakeBtsState extends State<EditWaterIntakeBts> {
               child: _buildDateTimeItem(
                 context: context,
                 value: '15:00 PM',
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  context.showSetHourBts();
+                },
               ),
             ),
           ],

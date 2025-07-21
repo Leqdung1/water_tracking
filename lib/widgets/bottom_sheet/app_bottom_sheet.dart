@@ -81,7 +81,7 @@ class AppBottomSheet extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 16),
                     margin: EdgeInsets.zero,
                     color: AppThemeConst.primaryColor.withOpacity(0.18),
-                    onTap: onCancel,
+                    onTap: onCancel ,
                     title: cancelText ?? t.core.cancel,
                     textColor: AppThemeConst.primaryColor,
                   ),

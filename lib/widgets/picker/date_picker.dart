@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:water_tracking/core/enum/app_enum.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
@@ -54,72 +53,119 @@ class _DatePickerState extends State<DatePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final Color selectedColor = AppThemeConst.primaryColor;
+    final Color unselectedColor = AppThemeConst.neutralColor1;
+    final double pickerHeight = 220;
+    final double itemExtent = 33;
+
+
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      height: 200,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      height: pickerHeight,
+      child: Stack(
         children: [
-          // ---------------------------- Month Picker ---------------------------- //
-          Expanded(
-            child: CupertinoPicker(
-              itemExtent: 33,
-              scrollController: monthScrollController,
-              onSelectedItemChanged: (index) {
-                selectedMonth = index + 1;
-              },
-              children: months.map((month) {
-                return Center(
-                  child: Text(
-                    month,
-                    style: context.textTheme.body22.copyWith(
-                      color: AppThemeConst.neutralColor1,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // ---------------------------- Month Picker ---------------------------- //
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: itemExtent,
+                  scrollController: monthScrollController,
+                  selectionOverlay: Container(),
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      selectedMonth = index + 1;
+                    });
+                  },
+                  children: List.generate(months.length, (index) {
+                    final bool isSelected = selectedMonth == index + 1;
+                    return Center(
+                      child: Text(
+                        months[index],
+                        style: context.textTheme.body22.copyWith(
+                          color: isSelected ? selectedColor : unselectedColor,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontSize: isSelected ? 26 : 18,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
 
-          // ---------------------------- Day Picker ---------------------------- //
-          Expanded(
-            child: CupertinoPicker(
-              itemExtent: 33,
-              scrollController: dayScrollController,
-              onSelectedItemChanged: (index) {
-                selectedDay = index + 1;
-              },
-              children: days.map((day) {
-                return Center(
-                  child: Text(
-                    day.toString(),
-                    style: context.textTheme.body22.copyWith(
-                      color: AppThemeConst.neutralColor1,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
+              // ---------------------------- Day Picker ---------------------------- //
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: itemExtent,
+                  scrollController: dayScrollController,
+                  selectionOverlay: Container(),
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      selectedDay = index + 1;
+                    });
+                  },
+                  children: List.generate(days.length, (index) {
+                    final bool isSelected = selectedDay == index + 1;
+                    return Center(
+                      child: Text(
+                        days[index].toString(),
+                        style: context.textTheme.body22.copyWith(
+                          color: isSelected ? selectedColor : unselectedColor,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontSize: isSelected ? 26 : 18,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
 
-          // ---------------------------- Year Picker ---------------------------- //
-          Expanded(
-            child: CupertinoPicker(
-              itemExtent: 33,
-              scrollController: yearScrollController,
-              onSelectedItemChanged: (index) {
-                selectedYear = years[index];
-              },
-              children: years.map((year) {
-                return Center(
-                  child: Text(
-                    year.toString(),
-                    style: context.textTheme.body22.copyWith(
-                      color: AppThemeConst.neutralColor1,
-                    ),
-                  ),
-                );
-              }).toList(),
+              // ---------------------------- Year Picker ---------------------------- //
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: itemExtent,
+                  scrollController: yearScrollController,
+                  selectionOverlay: Container(),
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      selectedYear = years[index];
+                    });
+                  },
+                  children: List.generate(years.length, (index) {
+                    final bool isSelected = selectedYear == years[index];
+                    return Text(
+                      years[index].toString(),
+                      style: context.textTheme.body22.copyWith(
+                        color: isSelected ? selectedColor : unselectedColor,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                        fontSize: isSelected ? 26 : 18,
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: pickerHeight / 2 - itemExtent / 2,
+            child: Column(
+              children: [
+                Container(
+                  height: 1,
+                  color: AppThemeConst.primaryColor,
+                ),
+                SizedBox(height: itemExtent - 2),
+                Container(
+                  height: 1,
+                  color: AppThemeConst.primaryColor,
+                ),
+              ],
             ),
           ),
         ],
