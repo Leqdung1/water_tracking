@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/enum/app_enum.dart';
+import '../../../core/services/notification_manager.dart';
 
 part 'login_state.dart';
 
@@ -23,6 +24,10 @@ class LoginCubit extends Cubit<LoginState> {
         email: email,
         password: password,
       );
+
+      // Initialize notifications for the logged-in user
+      await NotificationManager().initializeForUser();
+
       emit(state.copyWith(
         status: BlocStatus.success,
         email: email,
@@ -36,10 +41,9 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
- bool isValidEmail(String email) {
-  final emailRegex = RegExp(
-    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+"
-  );
-  return emailRegex.hasMatch(email);
-}
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    return emailRegex.hasMatch(email);
+  }
 }

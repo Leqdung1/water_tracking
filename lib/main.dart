@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:water_tracking/core/constants/app_theme_const.dart';
 import 'package:water_tracking/core/observer/bloc_observer.dart';
+import 'package:water_tracking/core/services/notification_service.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/history/history_screen.dart';
 import 'package:water_tracking/screens/home/home_screen.dart';
@@ -16,10 +17,16 @@ import 'package:water_tracking/screens/report/report_screen.dart';
 import 'package:water_tracking/screens/setting/setting_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
 import 'package:water_tracking/screens/switch_cup_size/switch_cup_size_screen.dart';
+import 'package:water_tracking/screens/notification_settings/notification_settings_screen.dart';
+import 'package:water_tracking/screens/notification_history/notification_history_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // Initialize notification service
+  await NotificationService().initialize();
+
   Bloc.observer = MyBlocObserver();
   runApp(TranslationProvider(child: const MyApp()));
 }
@@ -58,6 +65,10 @@ class MyApp extends StatelessWidget {
           '/report': (context) => const ReportScreen(),
           '/setting': (context) => const SettingScreen(),
           '/switch_cup_size': (context) => const SwitchCupSizeScreen(),
+          '/notification_settings': (context) =>
+              const NotificationSettingsScreen(),
+          '/notification_history': (context) =>
+              const NotificationHistoryScreen(),
         });
   }
 }
