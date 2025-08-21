@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_tracking/survey/cubit/survey_cubit.dart';
 import 'package:water_tracking/survey/widgets/progress_tracker.dart';
 import 'package:water_tracking/survey/widgets/step_gender.dart';
+import 'package:water_tracking/survey/widgets/step_tall.dart';
+import 'package:water_tracking/survey/widgets/step_weight.dart';
 
 import '../core/constants/app_theme_const.dart';
 
@@ -25,6 +27,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
 
   final List<Widget> _steps = [
     const StepGender(),
+    const StepTall(),
+    const StepWeight(),
   ];
 
   @override
@@ -81,12 +85,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     }
                   },
                   icon: const Icon(Icons.arrow_back_ios_new)),
-              title: Visibility(
-                visible: step != 7 && step != 8,
-                child: StepProgressTracker(
-                  currentStep: step + 1,
-                  totalSteps: totalSteps,
-                ),
+              title: StepProgressTracker(
+                currentStep: step + 1,
+                totalSteps: totalSteps,
               ),
               centerTitle: true,
             ),

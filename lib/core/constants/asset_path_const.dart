@@ -21,6 +21,9 @@ class AssetPathConst {
   static const String imgCup250 = 'assets/images/img_cup_250.png';
   static const String imgCup500 = 'assets/images/img_cup_500.png';
   static const String imgCup600 = 'assets/images/img_cup_600.png';
+  static const String imgThin = 'assets/images/img_thin.png';
+  static const String imgFat = 'assets/images/img_fat.png';
+  static const String imgNormal = 'assets/images/img_normal.png';
 
 // ------------------------- Animations ------------------------- //
   static const String animationLoading = 'assets/animations/anim_loading.json';

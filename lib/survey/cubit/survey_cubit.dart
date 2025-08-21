@@ -23,4 +23,20 @@ class SurveyCubit extends Cubit<SurveyState> {
   void updateGender(Gender gender) {
     emit(state.copyWith(gender: gender));
   }
+
+  void updateHeightUnit(HeightUnit unit) {
+    emit(state.copyWith(heightUnit: unit));
+  }
+
+  void updateHeightCm(int heightCm) {
+    emit(state.copyWith(heightCm: heightCm));
+  }
+
+  void updateWeightUnit(WeightUnit unit) {
+    emit(state.copyWith(weightUnit: unit));
+  }
+
+  void updateWeightKg(int weightKg) {
+    emit(state.copyWith(weightKg: weightKg));
+  }
 }

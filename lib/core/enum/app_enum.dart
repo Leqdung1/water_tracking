@@ -10,40 +10,38 @@ enum BlocStatus {
   error,
 }
 
-
 enum MainTab {
   home,
-  history, 
-  report, 
+  history,
+  report,
   setting,
 }
 
-
 enum CupSize {
-  cup100, 
-  cup150, 
-  cup200, 
-  cup250, 
-  cup500, 
+  cup100,
+  cup150,
+  cup200,
+  cup250,
+  cup500,
   cup600;
 
   String get imagePath => switch (this) {
-    cup100 => AssetPathConst.imgCup100,
-    cup150 => AssetPathConst.imgCup150,
-    cup200 => AssetPathConst.imgCup200,
-    cup250 => AssetPathConst.imgCup250,
-    cup500 => AssetPathConst.imgCup500,
-    cup600 => AssetPathConst.imgCup600,
-  };
+        cup100 => AssetPathConst.imgCup100,
+        cup150 => AssetPathConst.imgCup150,
+        cup200 => AssetPathConst.imgCup200,
+        cup250 => AssetPathConst.imgCup250,
+        cup500 => AssetPathConst.imgCup500,
+        cup600 => AssetPathConst.imgCup600,
+      };
 
   String get name => switch (this) {
-    cup100 => '100 mL',
-    cup150 => '150 mL',
-    cup200 => '200 mL',
-    cup250 => '250 mL',
-    cup500 => '500 mL',
-    cup600 => '600 mL',
-  };
+        cup100 => '100 mL',
+        cup150 => '150 mL',
+        cup200 => '200 mL',
+        cup250 => '250 mL',
+        cup500 => '500 mL',
+        cup600 => '600 mL',
+      };
 }
 
 enum Gender {
@@ -52,16 +50,16 @@ enum Gender {
   preferNotToSay;
 
   String get name => switch (this) {
-    male => t.core.male,
-    female => t.core.female,
-    preferNotToSay => t.core.prefer_not_to_say,
-  };
+        male => t.core.male,
+        female => t.core.female,
+        preferNotToSay => t.core.prefer_not_to_say,
+      };
 
   IconData? get icon => switch (this) {
-    male => Icons.male_outlined,
-    female => Icons.female_outlined,
-    preferNotToSay => null,
-  };
+        male => Icons.male_outlined,
+        female => Icons.female_outlined,
+        preferNotToSay => null,
+      };
 }
 
 enum TypeDrink {
@@ -73,36 +71,35 @@ enum TypeDrink {
   liquor,
   smoothie,
   soda,
-  tea, 
+  tea,
   wine;
 
   String get imagePath => switch (this) {
-    beer => AssetPathConst.icBeer,
-    carbon => AssetPathConst.icCarbon,
-    coconute => AssetPathConst.icCoconute,
-    coffee => AssetPathConst.icCoffee,
-    juice => AssetPathConst.icJuice,
-    liquor => AssetPathConst.icLiquor,
-    smoothie => AssetPathConst.icSmoothie,
-    soda => AssetPathConst.icSoda,
-    tea => AssetPathConst.icTea,
-    wine => AssetPathConst.icWine,
-  };
+        beer => AssetPathConst.icBeer,
+        carbon => AssetPathConst.icCarbon,
+        coconute => AssetPathConst.icCoconute,
+        coffee => AssetPathConst.icCoffee,
+        juice => AssetPathConst.icJuice,
+        liquor => AssetPathConst.icLiquor,
+        smoothie => AssetPathConst.icSmoothie,
+        soda => AssetPathConst.icSoda,
+        tea => AssetPathConst.icTea,
+        wine => AssetPathConst.icWine,
+      };
 
   String get name => switch (this) {
-    beer => t.core.beer,
-    carbon => t.core.carbon,
-    coconute => t.core.coconute,
-    coffee => t.core.coffee,
-    juice => t.core.juice,
-    liquor => t.core.liquor,
-    smoothie => t.core.smoothie,
-    soda => t.core.soda,
-    tea => t.core.tea,
-    wine => t.core.wine,
-  };
+        beer => t.core.beer,
+        carbon => t.core.carbon,
+        coconute => t.core.coconute,
+        coffee => t.core.coffee,
+        juice => t.core.juice,
+        liquor => t.core.liquor,
+        smoothie => t.core.smoothie,
+        soda => t.core.soda,
+        tea => t.core.tea,
+        wine => t.core.wine,
+      };
 }
-
 
 enum Month {
   january,
@@ -118,35 +115,37 @@ enum Month {
   november,
   december;
 
-
   String get name => switch (this) {
-    january => t.core.january,
-    february => t.core.february,
-    march => t.core.march,
-    april => t.core.april,
-    may => t.core.may,
-    june => t.core.june,
-    july => t.core.july,
-    august => t.core.august,
-    september => t.core.september,
-    october => t.core.october,
-    november => t.core.november,
-    december => t.core.december,
-  };
-
+        january => t.core.january,
+        february => t.core.february,
+        march => t.core.march,
+        april => t.core.april,
+        may => t.core.may,
+        june => t.core.june,
+        july => t.core.july,
+        august => t.core.august,
+        september => t.core.september,
+        october => t.core.october,
+        november => t.core.november,
+        december => t.core.december,
+      };
 
   String get monthNumber => switch (this) {
-    january => '1',
-    february => '2',
-    march => '3',
-    april => '4',
-    may => '5',
-    june => '6',
-    july => '7',
-    august => '8',
-    september => '9',
-    october => '10',
-    november => '11',
-    december => '12',
-  };
+        january => '1',
+        february => '2',
+        march => '3',
+        april => '4',
+        may => '5',
+        june => '6',
+        july => '7',
+        august => '8',
+        september => '9',
+        october => '10',
+        november => '11',
+        december => '12',
+      };
 }
+
+enum HeightUnit { cm, ft }
+
+enum WeightUnit { kg, lb }
