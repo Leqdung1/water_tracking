@@ -39,4 +39,8 @@ class SurveyCubit extends Cubit<SurveyState> {
   void updateWeightKg(int weightKg) {
     emit(state.copyWith(weightKg: weightKg));
   }
+
+  void updateAge(int age) {
+    emit(state.copyWith(age: age));
+  }
 }

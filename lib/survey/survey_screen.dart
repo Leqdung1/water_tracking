@@ -7,6 +7,7 @@ import 'package:water_tracking/survey/widgets/progress_tracker.dart';
 import 'package:water_tracking/survey/widgets/step_gender.dart';
 import 'package:water_tracking/survey/widgets/step_tall.dart';
 import 'package:water_tracking/survey/widgets/step_weight.dart';
+import 'package:water_tracking/survey/widgets/step_age.dart';
 
 import '../core/constants/app_theme_const.dart';
 
@@ -29,6 +30,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     const StepGender(),
     const StepTall(),
     const StepWeight(),
+    const StepAge(),
   ];
 
   @override

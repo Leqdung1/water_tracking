@@ -11,6 +11,7 @@ class SurveyState extends Equatable {
     this.heightUnit = HeightUnit.cm,
     this.weightKg,
     this.weightUnit = WeightUnit.kg,
+    this.age,
   });
 
   final int step;
@@ -22,6 +23,7 @@ class SurveyState extends Equatable {
   final HeightUnit heightUnit;
   final int? weightKg; // stored in kilograms
   final WeightUnit weightUnit;
+  final int? age;
 
   SurveyState copyWith({
     int? step,
@@ -33,6 +35,7 @@ class SurveyState extends Equatable {
     HeightUnit? heightUnit,
     int? weightKg,
     WeightUnit? weightUnit,
+    int? age,
   }) {
     return SurveyState(
       step: step ?? this.step,
@@ -44,6 +47,7 @@ class SurveyState extends Equatable {
       heightUnit: heightUnit ?? this.heightUnit,
       weightKg: weightKg ?? this.weightKg,
       weightUnit: weightUnit ?? this.weightUnit,
+      age: age ?? this.age,
     );
   }
 
@@ -58,5 +62,6 @@ class SurveyState extends Equatable {
         heightUnit,
         weightKg,
         weightUnit,
+        age,
       ];
 }
