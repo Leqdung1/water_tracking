@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../i18n/strings.g.dart';
 import '../constants/asset_path_const.dart';
 
@@ -44,34 +46,21 @@ enum CupSize {
   };
 }
 
-
-enum DayInAWeek {
-  monday,
-  tuesday,
-  wednesday,
-  thursday,
-  friday,
-  saturday,
-  sunday;
+enum Gender {
+  male,
+  female,
+  preferNotToSay;
 
   String get name => switch (this) {
-    monday => t.core.monday,
-    tuesday => t.core.tuesday,
-    wednesday => t.core.wednesday,
-    thursday => t.core.thursday,
-    friday => t.core.friday,
-    saturday => t.core.saturday,
-    sunday => t.core.sunday,
+    male => t.core.male,
+    female => t.core.female,
+    preferNotToSay => t.core.prefer_not_to_say,
   };
 
-  String get shortName => switch (this) {
-    monday => 'Mon',
-    tuesday => 'Tue',
-    wednesday => 'Wed',
-    thursday => 'Thu',
-    friday => 'Fri',
-    saturday => 'Sat',
-    sunday => 'Sun',
+  IconData? get icon => switch (this) {
+    male => Icons.male_outlined,
+    female => Icons.female_outlined,
+    preferNotToSay => null,
   };
 }
 

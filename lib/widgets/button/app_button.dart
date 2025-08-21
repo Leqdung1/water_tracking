@@ -14,6 +14,7 @@ class AppButton extends StatelessWidget {
   final Color? textColor;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
+  final bool isEnabled;
   const AppButton({
     super.key,
     this.color,
@@ -25,24 +26,30 @@ class AppButton extends StatelessWidget {
     this.textColor,
     this.padding,
     this.margin,
+    this.isEnabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: color ?? AppThemeConst.primaryColor,
-        borderRadius: BorderRadius.circular(borderRadius ?? 100),
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        title ?? '',
-        style: context.textTheme.body17.copyWith(
-          color: textColor ?? Colors.white,
+    return GestureDetector(
+      onTap: isEnabled ? onTap : null,
+      child: Container(
+        margin: margin ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: padding ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: isEnabled
+              ? color ?? AppThemeConst.primaryColor
+              : AppThemeConst.primaryColor.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(borderRadius ?? 100),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title ?? '',
+          style: context.textTheme.body17.copyWith(
+            color: textColor ?? Colors.white,
+          ),
         ),
       ),
     );
