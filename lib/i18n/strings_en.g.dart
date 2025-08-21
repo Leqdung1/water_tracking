@@ -110,6 +110,12 @@ class TranslationsCoreEn {
 	String get back => 'Back';
 	String get setDate => 'Set Date';
 	String get setHour => 'Set Hour';
+	String get drink_completion => 'Drink Completeion';
+	String get hydrate => 'Hydrate';
+	String get drink_types => 'Drink Types';
+	String get weekly => 'Weekly';
+	String get monthly => 'Monthly';
+	String get yearly => 'Yearly';
 }
 
 /// Flat map(s) containing all translations.
@@ -178,6 +184,12 @@ extension on Translations {
 			case 'core.back': return 'Back';
 			case 'core.setDate': return 'Set Date';
 			case 'core.setHour': return 'Set Hour';
+			case 'core.drink_completion': return 'Drink Completeion';
+			case 'core.hydrate': return 'Hydrate';
+			case 'core.drink_types': return 'Drink Types';
+			case 'core.weekly': return 'Weekly';
+			case 'core.monthly': return 'Monthly';
+			case 'core.yearly': return 'Yearly';
 			default: return null;
 		}
 	}

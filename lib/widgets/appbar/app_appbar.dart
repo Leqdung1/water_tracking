@@ -7,11 +7,17 @@ import '../../core/constants/app_theme_const.dart';
 import '../../core/constants/asset_path_const.dart';
 
 class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const AppAppbar({super.key, required this.title, this.backgroundColor});
+  const AppAppbar({
+    super.key,
+    required this.title,
+    this.backgroundColor,
+    this.bottomSection,
+  });
   final String title;
   final Color? backgroundColor;
+  final Widget? bottomSection;
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 100);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +38,10 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: context.textTheme.titleAppBar,
       ),
       centerTitle: true,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: bottomSection != null ? bottomSection! : SizedBox.shrink(),
+      ),
     );
   }
 }

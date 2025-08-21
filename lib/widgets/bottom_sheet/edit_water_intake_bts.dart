@@ -6,7 +6,6 @@ import 'package:water_tracking/widgets/bottom_sheet/app_bottom_sheet.dart';
 import 'package:water_tracking/widgets/bottom_sheet/set_date_bts.dart';
 import 'package:water_tracking/widgets/bottom_sheet/set_hour_bts.dart';
 import 'package:water_tracking/widgets/form/app_text_field.dart';
-import 'package:water_tracking/widgets/picker/hour_picker.dart';
 
 import '../../core/constants/app_theme_const.dart';
 import '../../core/constants/asset_path_const.dart';

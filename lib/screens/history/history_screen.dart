@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:water_tracking/screens/history/widgets/history_date_picker.dart';
 import 'package:water_tracking/screens/history/widgets/history_list_water.dart';
+import 'package:water_tracking/screens/history/widgets/tab_view_calendar.dart';
 
 import '../../core/constants/app_theme_const.dart';
 import '../../i18n/strings.g.dart';
@@ -20,7 +20,7 @@ class HistoryScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const HistoryDatePicker(),
+            TabViewCalendar(),
             Gap(16),
             const HistoryListWater(),
           ],

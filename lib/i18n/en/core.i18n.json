@@ -59,5 +59,11 @@
     "ok": "OK" , 
     "back": "Back", 
     "setDate": "Set Date", 
-    "setHour": "Set Hour"
+    "setHour": "Set Hour", 
+    "drink_completion": "Drink Completeion", 
+    "hydrate": "Hydrate", 
+    "drink_types": "Drink Types", 
+    "weekly": "Weekly", 
+    "monthly": "Monthly", 
+    "yearly": "Yearly"
 }

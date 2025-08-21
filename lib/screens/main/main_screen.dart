@@ -63,59 +63,57 @@ class _MainScreenState extends State<MainScreen>
   }
 
   Widget navBar() {
-    return SafeArea(
-      child: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ...[
-              {
-                'tab': MainTab.home,
-                'icon': Icons.home,
-                'label': t.core.home,
-              },
-              {
-                'tab': MainTab.history,
-                'icon': Icons.history,
-                'label': t.core.history,
-              },
-              {
-                'tab': MainTab.report,
-                'icon': Icons.insert_chart,
-                'label': t.core.report,
-              },
-              {
-                'tab': MainTab.setting,
-                'icon': Icons.settings,
-                'label': t.core.setting,
-              },
-            ].map((tabData) {
-              final tab = tabData['tab'] as MainTab;
-              final isActive = tabIndex == tab.index;
-              final color = isActive ? AppThemeConst.primaryColor : Colors.grey;
-              return GestureDetector(
-                onTap: () => onTabChanged(tab.index),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(tabData['icon'] as IconData, color: color),
-                    const Gap(4),
-                    Text(
-                      tabData['label'] as String,
-                      style: context.textTheme.body15.copyWith(
-                        color: isActive
-                            ? AppThemeConst.primaryColor
-                            : AppThemeConst.neutralColor2,
-                      ),
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(vertical: 8).copyWith(bottom: 32),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ...[
+            {
+              'tab': MainTab.home,
+              'icon': Icons.home,
+              'label': t.core.home,
+            },
+            {
+              'tab': MainTab.history,
+              'icon': Icons.history,
+              'label': t.core.history,
+            },
+            {
+              'tab': MainTab.report,
+              'icon': Icons.insert_chart,
+              'label': t.core.report,
+            },
+            {
+              'tab': MainTab.setting,
+              'icon': Icons.settings,
+              'label': t.core.setting,
+            },
+          ].map((tabData) {
+            final tab = tabData['tab'] as MainTab;
+            final isActive = tabIndex == tab.index;
+            final color = isActive ? AppThemeConst.primaryColor : Colors.grey;
+            return GestureDetector(
+              onTap: () => onTabChanged(tab.index),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(tabData['icon'] as IconData, color: color),
+                  const Gap(4),
+                  Text(
+                    tabData['label'] as String,
+                    style: context.textTheme.body15.copyWith(
+                      color: isActive
+                          ? AppThemeConst.primaryColor
+                          : AppThemeConst.neutralColor2,
                     ),
-                  ],
-                ),
-              );
-            }),
-          ],
-        ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
