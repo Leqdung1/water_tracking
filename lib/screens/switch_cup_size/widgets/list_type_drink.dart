@@ -16,6 +16,7 @@ class ListTypeDrink extends StatelessWidget {
         crossAxisCount: 4,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
+        childAspectRatio: 0.8,
       ),
       itemBuilder: (context, index) {
         final typeDrink = TypeDrink.values[index];

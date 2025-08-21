@@ -23,7 +23,9 @@ class SwitchCupSizeScreen extends StatelessWidget {
         ),
         title: Text(
           t.core.switch_cup_size,
-          style: context.textTheme.titleAppBar,
+          style: context.textTheme.titleAppBar.copyWith(
+            color: AppThemeConst.neutralColor1,
+          ),
         ),
         centerTitle: true,
       ),
@@ -34,12 +36,19 @@ class SwitchCupSizeScreen extends StatelessWidget {
             ListVolumeGlass(),
             Row(
               children: [
-                Text(t.core.orDrink),
+                Text(
+                  t.core.orDrink,
+                  style: context.textTheme.body15.copyWith(
+                    color: AppThemeConst.neutralColor2,
+                  ),
+                ),
                 Gap(8),
-                Container(
-                  width: double.infinity,
-                  height: 0.5,
-                  color: AppThemeConst.neutralColor2,
+                Expanded(
+                  child: Divider(
+                    color: AppThemeConst.neutralColor2,
+                    height: 1,
+                    thickness: 0.4,
+                  ),
                 ),
               ],
             ),

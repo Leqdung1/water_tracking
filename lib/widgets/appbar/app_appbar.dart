@@ -17,7 +17,8 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Widget? bottomSection;
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 100);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottomSection != null ? 100 : 0));
 
   @override
   Widget build(BuildContext context) {

@@ -6,4 +6,3 @@ class ReportState extends Equatable {
   @override
   List<Object> get props => [];
 }
-
