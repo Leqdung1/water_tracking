@@ -42,6 +42,50 @@ enum CupSize {
         cup500 => '500 mL',
         cup600 => '600 mL',
       };
+
+  int get volume => switch (this) {
+        cup100 => 100,
+        cup150 => 150,
+        cup200 => 200,
+        cup250 => 250,
+        cup500 => 500,
+        cup600 => 600,
+      };
+
+  // Get recommended cup sizes based on daily water goal
+  static List<CupSize> getRecommendedCups(double dailyGoalMl) {
+    if (dailyGoalMl <= 1000) {
+      // Small goal: Use smaller cups (100-200mL)
+      return [CupSize.cup100, CupSize.cup150, CupSize.cup200];
+    } else if (dailyGoalMl <= 2000) {
+      // Medium goal: Use medium cups (150-250mL)
+      return [CupSize.cup150, CupSize.cup200, CupSize.cup250];
+    } else if (dailyGoalMl <= 3000) {
+      // Large goal: Use larger cups (200-500mL)
+      return [CupSize.cup200, CupSize.cup250, CupSize.cup500];
+    } else {
+      // Very large goal: Use largest cups (250-600mL)
+      return [CupSize.cup250, CupSize.cup500, CupSize.cup600];
+    }
+  }
+
+  // Get primary recommended cup based on daily goal
+  static CupSize getPrimaryCup(double dailyGoalMl) {
+    if (dailyGoalMl <= 1000) {
+      return CupSize.cup150; // Small goal: 150mL cup
+    } else if (dailyGoalMl <= 2000) {
+      return CupSize.cup200; // Medium goal: 200mL cup
+    } else if (dailyGoalMl <= 3000) {
+      return CupSize.cup250; // Large goal: 250mL cup
+    } else {
+      return CupSize.cup500; // Very large goal: 500mL cup
+    }
+  }
+
+  // Calculate how many cups needed to reach daily goal
+  static int getCupsNeeded(double dailyGoalMl, CupSize cupSize) {
+    return (dailyGoalMl / cupSize.volume).ceil();
+  }
 }
 
 enum Gender {
@@ -150,6 +194,16 @@ enum HeightUnit { cm, ft }
 
 enum WeightUnit { kg, lb }
 
+enum WaterUnit {
+  ml,
+  l;
+
+  String get name => switch (this) {
+        ml => 'mL',
+        l => 'L',
+      };
+}
+
 enum ActivityLevel {
   sedentary,
   light,
@@ -164,13 +218,17 @@ enum ActivityLevel {
       };
 
   String get description => switch (this) {
-        sedentary => t.core.limited_physical_activity_mostly_sitting_or_lying_down,
-        light => t.core.some_movement_throughout_the_day_such_as_light_walking_or_occasional_standing,
-        moderate => t.core.regular_exercise_or_physical_activity_such_as_jogging_or_cycling,
-        veryActive => t.core.intense_physical_activity_or_training_such_as_heavy_lifting_or_high_intensity_training,
+        sedentary =>
+          t.core.limited_physical_activity_mostly_sitting_or_lying_down,
+        light => t.core
+            .some_movement_throughout_the_day_such_as_light_walking_or_occasional_standing,
+        moderate => t.core
+            .regular_exercise_or_physical_activity_such_as_jogging_or_cycling,
+        veryActive => t.core
+            .intense_physical_activity_or_training_such_as_heavy_lifting_or_high_intensity_training,
       };
 
-      String get imagePath => switch (this) {
+  String get imagePath => switch (this) {
         sedentary => AssetPathConst.imgSedentary,
         light => AssetPathConst.imgRun,
         moderate => AssetPathConst.imgPowerLifting,
@@ -178,10 +236,9 @@ enum ActivityLevel {
       };
 }
 
-
 enum Weather {
-  hot, 
-  temperate, 
+  hot,
+  temperate,
   cold;
 
   String get name => switch (this) {

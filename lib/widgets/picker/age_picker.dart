@@ -24,7 +24,7 @@ class _AgePickerState extends State<AgePicker> {
         final cubit = context.read<SurveyCubit>();
         final int selectedAge = state.userInfo?.age ?? 25;
         final List<int> ages =
-            List<int>.generate(100 - 12 + 1, (i) => 12 + i); // 12..100
+            List<int>.generate(100 - 12 + 1, (i) => 12 + i);
         final int initialIndex = (selectedAge - 12).clamp(0, ages.length - 1);
 
         return SizedBox(
