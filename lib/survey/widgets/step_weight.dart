@@ -85,8 +85,7 @@ class _StepWeightState extends State<StepWeight> {
                     ],
                   ),
                   onPressed: () async {
-                    cubit.updateWeightUnit(unit);
-                    cubit.updateWeightKg(weightKg);
+                    cubit.updateUserInfo(weightUnit: unit, weightKg: weightKg);
                     cubit.nextStep();
                   },
                 );

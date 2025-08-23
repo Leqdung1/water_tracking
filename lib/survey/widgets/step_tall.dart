@@ -92,8 +92,7 @@ class _StepTallState extends State<StepTall> {
                         ],
                       ),
                       onPressed: () async {
-                        cubit.updateHeightUnit(unit);
-                        cubit.updateHeightCm(heightCm);
+                        cubit.updateUserInfo(unit: unit, heightCm: heightCm);
                         cubit.nextStep();
                       },
                     ),

@@ -9,6 +9,7 @@ part 'survey_state.dart';
 class SurveyCubit extends Cubit<SurveyState> {
   SurveyCubit() : super(const SurveyState());
 
+  // --------------------------  STEP -------------------------- //
   void nextStep() {
     emit(state.copyWith(step: state.step + 1));
   }
@@ -21,43 +22,35 @@ class SurveyCubit extends Cubit<SurveyState> {
     emit(state.copyWith(step: step));
   }
 
-  void updateGender(Gender gender) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(gender: gender)));
-  }
+  // --------------------------  USER INFO -------------------------- //
 
-  void updateHeightUnit(HeightUnit unit) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(heightUnit: unit)));
-  }
-
-  void updateHeightCm(double heightCm) {
+  void updateUserInfo({
+    Gender? gender,
+    HeightUnit? unit,
+    double? heightCm,
+    WeightUnit? weightUnit,
+    double? weightKg,
+    int? age,
+    DateTime? timeWakeUp,
+    ActivityLevel? activityLevel,
+    Weather? weather,
+  }) {
     emit(
-        state.copyWith(userInfo: state.userInfo?.copyWith(heightCm: heightCm)));
+      state.copyWith(
+        userInfo: state.userInfo?.copyWith(
+          gender: gender,
+          heightUnit: unit,
+          heightCm: heightCm,
+          weightUnit: weightUnit,
+          weightKg: weightKg,
+          age: age,
+          timeWakeUp: timeWakeUp,
+          activityLevel: activityLevel,
+          weather: weather,
+        ),
+      ),
+    );
   }
 
-  void updateWeightUnit(WeightUnit unit) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(weightUnit: unit)));
-  }
-
-  void updateWeightKg(double weightKg) {
-    emit(
-        state.copyWith(userInfo: state.userInfo?.copyWith(weightKg: weightKg)));
-  }
-
-  void updateAge(int age) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(age: age)));
-  }
-
-  void updateTimeWakeUp(DateTime timeWakeUp) {
-    emit(state.copyWith(
-        userInfo: state.userInfo?.copyWith(timeWakeUp: timeWakeUp)));
-  }
-
-  void updateActivityLevel(ActivityLevel activityLevel) {
-    emit(state.copyWith(
-        userInfo: state.userInfo?.copyWith(activityLevel: activityLevel)));
-  }
-
-  void updateWeather(Weather weather) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(weather: weather)));
-  }
+  // --------------------------  WATER -------------------------- //
 }

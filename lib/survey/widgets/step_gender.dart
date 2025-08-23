@@ -89,7 +89,7 @@ class _StepGenderState extends State<StepGender> {
               ),
               onPressed: () {
                 if (value != null) {
-                  cubit.updateGender(value);
+                  cubit.updateUserInfo(gender: value);
                   cubit.nextStep();
                 }
               },

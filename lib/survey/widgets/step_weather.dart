@@ -45,7 +45,7 @@ class _StepWeatherState extends State<StepWeather> {
               child: _buildWeatherPicker(context, value),
               onPressed: () {
                 if (value != null) {
-                  cubit.updateWeather(value);
+                  cubit.updateUserInfo(weather: value);
                   Navigator.push(
                     context,
                     MaterialPageRoute(

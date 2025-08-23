@@ -43,7 +43,8 @@ class _AgePickerState extends State<AgePicker> {
                 ),
               ),
             ),
-            onSelectedItemChanged: (index) => cubit.updateAge(ages[index]),
+            onSelectedItemChanged: (index) =>
+                cubit.updateUserInfo(age: ages[index]),
             children: List.generate(ages.length, (index) {
               final value = ages[index];
               final isSelected = (state.userInfo?.age ?? selectedAge) == value;

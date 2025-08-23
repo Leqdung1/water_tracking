@@ -46,7 +46,7 @@ class _StepActivityLevelState extends State<StepActivityLevel> {
               child: _buildActivityLevelPicker(context, value),
               onPressed: () {
                 if (value != null) {
-                  cubit.updateActivityLevel(value);
+                  cubit.updateUserInfo(activityLevel: value);
                   cubit.nextStep();
                 }
               },
