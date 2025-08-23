@@ -25,6 +25,30 @@ class WeightPicker extends StatefulWidget {
 class _WeightPickerState extends State<WeightPicker> {
   static const int minKg = 30;
   static const int maxKg = 200;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateSelectedIndex();
+  }
+
+  @override
+  void didUpdateWidget(WeightPicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.unit != widget.unit ||
+        oldWidget.selectedWeightKg != widget.selectedWeightKg) {
+      _updateSelectedIndex();
+    }
+  }
+
+  void _updateSelectedIndex() {
+    final List<int> kgValues =
+        List<int>.generate(maxKg - minKg + 1, (i) => minKg + i);
+    final double currentWeightKg = widget.selectedWeightKg ?? 70.0;
+    _selectedIndex =
+        (currentWeightKg - minKg).clamp(0, kgValues.length - 1).toInt();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +68,7 @@ class _WeightPickerState extends State<WeightPicker> {
     }
 
     return SizedBox(
+      height: 220,
       width: 100,
       child: CupertinoPicker(
         itemExtent: 44,
@@ -58,16 +83,45 @@ class _WeightPickerState extends State<WeightPicker> {
           ),
         ),
         onSelectedItemChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
           final kg = kgValues[index];
           widget.onWeightChanged(kg.toDouble());
         },
-        children: kgValues.map((kg) {
+        children: kgValues.asMap().entries.map((entry) {
+          final index = entry.key;
+          final kg = entry.value;
+          final isSelected = index == _selectedIndex;
+
           return Center(
-            child: Text(
-              displayForKg(kg),
-              style: context.textTheme.body22.copyWith(
-                color: AppThemeConst.primaryColor,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  displayForKg(kg),
+                  style: context.textTheme.body22.copyWith(
+                    color: isSelected
+                        ? AppThemeConst.primaryColor
+                        : AppThemeConst.neutralColor2,
+                    fontWeight:
+                        isSelected ? FontWeight.w700 : FontWeight.normal,
+                    fontSize: isSelected ? 26 : 18,
+                  ),
+                ),
+                if (isSelected)
+                  Text(
+                    widget.unit == WeightUnit.kg ? ' kg' : ' lb',
+                    style: context.textTheme.body22.copyWith(
+                      color: isSelected
+                          ? AppThemeConst.primaryColor
+                          : AppThemeConst.neutralColor2,
+                      fontWeight:
+                          isSelected ? FontWeight.w700 : FontWeight.normal,
+                      fontSize: isSelected ? 26 : 18,
+                    ),
+                  ),
+              ],
             ),
           );
         }).toList(),

@@ -5,4 +5,5 @@ class WaterRepository {
   Future<void> updateWater(WaterEntity water) async {
     await Hive.box<WaterEntity>('water').put(water.id, water);
   }
+
 }

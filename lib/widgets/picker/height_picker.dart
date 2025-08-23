@@ -22,6 +22,37 @@ class HeightPicker extends StatefulWidget {
 }
 
 class _HeightPickerState extends State<HeightPicker> {
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateSelectedIndex();
+  }
+
+  @override
+  void didUpdateWidget(HeightPicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.unit != widget.unit ||
+        oldWidget.selectedHeightCm != widget.selectedHeightCm) {
+      _updateSelectedIndex();
+    }
+  }
+
+  void _updateSelectedIndex() {
+    final List<int> values = widget.unit == HeightUnit.cm
+        ? List<int>.generate(241 - 120, (i) => 120 + i)
+        : List<int>.generate(8 * 12 + 11, (i) => i);
+
+    if (widget.unit == HeightUnit.cm) {
+      _selectedIndex =
+          (widget.selectedHeightCm - 120).clamp(0, values.length - 1).toInt();
+    } else {
+      final inches = ((widget.selectedHeightCm) / 2.54).round();
+      _selectedIndex = inches.clamp(0, values.length - 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build items based on unit
@@ -41,6 +72,10 @@ class _HeightPickerState extends State<HeightPicker> {
     }
 
     void onSelectedItemChanged(double index) {
+      setState(() {
+        _selectedIndex = index.toInt();
+      });
+
       if (widget.unit == HeightUnit.cm) {
         widget.onHeightChanged(values[index.toInt()].toDouble());
       } else {
@@ -74,19 +109,45 @@ class _HeightPickerState extends State<HeightPicker> {
             ),
           ),
         ),
-        children: values.map((v) {
+        children: values.asMap().entries.map((entry) {
+          final index = entry.key;
+          final value = entry.value;
+          final isSelected = index == _selectedIndex;
+
           return Center(
-            child: Text(
-              widget.unit == HeightUnit.cm
-                  ? '$v'
-                  : (() {
-                      final feet = v ~/ 12;
-                      final inch = v % 12;
-                      return "$feet' $inch\"";
-                    })(),
-              style: context.textTheme.body22.copyWith(
-                color: AppThemeConst.primaryColor,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  widget.unit == HeightUnit.cm
+                      ? '$value'
+                      : (() {
+                          final feet = value ~/ 12;
+                          final inch = value % 12;
+                          return "$feet' $inch\"";
+                        })(),
+                  style: context.textTheme.body22.copyWith(
+                    color: isSelected
+                        ? AppThemeConst.primaryColor
+                        : AppThemeConst.neutralColor2,
+                    fontWeight:
+                        isSelected ? FontWeight.w700 : FontWeight.normal,
+                    fontSize: isSelected ? 26 : 18,
+                  ),
+                ),
+                if (isSelected)
+                  Text(
+                    widget.unit == HeightUnit.cm ? ' cm' : ' in',
+                    style: context.textTheme.body22.copyWith(
+                      color: isSelected
+                          ? AppThemeConst.primaryColor
+                          : AppThemeConst.neutralColor2,
+                      fontWeight:
+                          isSelected ? FontWeight.w700 : FontWeight.normal,
+                      fontSize: isSelected ? 26 : 18,
+                    ),
+                  ),
+              ],
             ),
           );
         }).toList(),

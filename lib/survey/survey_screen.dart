@@ -8,6 +8,7 @@ import 'package:water_tracking/survey/widgets/progress_tracker.dart';
 import 'package:water_tracking/survey/widgets/step_activity_level.dart';
 import 'package:water_tracking/survey/widgets/step_gender.dart';
 import 'package:water_tracking/survey/widgets/step_tall.dart';
+import 'package:water_tracking/survey/widgets/step_time_wake_up.dart';
 import 'package:water_tracking/survey/widgets/step_weather.dart';
 import 'package:water_tracking/survey/widgets/step_weight.dart';
 import 'package:water_tracking/survey/widgets/step_age.dart';
@@ -34,6 +35,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     const StepTall(),
     const StepWeight(),
     const StepAge(),
+    const StepTimeWakeUp(),
     const StepActivityLevel(),
     const StepWeather(),
   ];
@@ -79,7 +81,6 @@ class _SurveyScreenState extends State<SurveyScreen> {
               state.step < _steps.length) {
             _goToStep(state.step);
           }
-          
         },
         builder: (context, state) {
           final step = state.step;

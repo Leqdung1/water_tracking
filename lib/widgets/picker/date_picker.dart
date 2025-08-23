@@ -19,6 +19,10 @@ class _DatePickerState extends State<DatePicker> {
   int selectedYear = DateTime.now().year;
   int selectedDay = DateTime.now().day;
 
+  int _selectedMonthIndex = 0;
+  int _selectedDayIndex = 0;
+  int _selectedYearIndex = 0;
+
   late FixedExtentScrollController monthScrollController;
   late FixedExtentScrollController yearScrollController;
   late FixedExtentScrollController dayScrollController;
@@ -34,12 +38,17 @@ class _DatePickerState extends State<DatePicker> {
   void initState() {
     super.initState();
 
+    // Initialize selected indices
+    _selectedMonthIndex = selectedMonth - 1;
+    _selectedDayIndex = selectedDay - 1;
+    _selectedYearIndex = selectedYear - 1800;
+
     monthScrollController =
-        FixedExtentScrollController(initialItem: selectedMonth - 1);
+        FixedExtentScrollController(initialItem: _selectedMonthIndex);
     dayScrollController =
-        FixedExtentScrollController(initialItem: selectedDay - 1);
+        FixedExtentScrollController(initialItem: _selectedDayIndex);
     yearScrollController =
-        FixedExtentScrollController(initialItem: selectedYear - 1800);
+        FixedExtentScrollController(initialItem: _selectedYearIndex);
   }
 
   @override
@@ -54,10 +63,9 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     final Color selectedColor = AppThemeConst.primaryColor;
-    final Color unselectedColor = AppThemeConst.neutralColor1;
+    final Color unselectedColor = AppThemeConst.neutralColor2;
     final double pickerHeight = 220;
     final double itemExtent = 33;
-
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -75,18 +83,19 @@ class _DatePickerState extends State<DatePicker> {
                   selectionOverlay: Container(),
                   onSelectedItemChanged: (index) {
                     setState(() {
+                      _selectedMonthIndex = index;
                       selectedMonth = index + 1;
                     });
                   },
                   children: List.generate(months.length, (index) {
-                    final bool isSelected = selectedMonth == index + 1;
+                    final bool isSelected = index == _selectedMonthIndex;
                     return Center(
                       child: Text(
                         months[index],
                         style: context.textTheme.body22.copyWith(
                           color: isSelected ? selectedColor : unselectedColor,
                           fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                              isSelected ? FontWeight.w700 : FontWeight.normal,
                           fontSize: isSelected ? 26 : 18,
                         ),
                       ),
@@ -103,18 +112,19 @@ class _DatePickerState extends State<DatePicker> {
                   selectionOverlay: Container(),
                   onSelectedItemChanged: (index) {
                     setState(() {
+                      _selectedDayIndex = index;
                       selectedDay = index + 1;
                     });
                   },
                   children: List.generate(days.length, (index) {
-                    final bool isSelected = selectedDay == index + 1;
+                    final bool isSelected = index == _selectedDayIndex;
                     return Center(
                       child: Text(
                         days[index].toString(),
                         style: context.textTheme.body22.copyWith(
                           color: isSelected ? selectedColor : unselectedColor,
                           fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                              isSelected ? FontWeight.w700 : FontWeight.normal,
                           fontSize: isSelected ? 26 : 18,
                         ),
                       ),
@@ -131,18 +141,21 @@ class _DatePickerState extends State<DatePicker> {
                   selectionOverlay: Container(),
                   onSelectedItemChanged: (index) {
                     setState(() {
+                      _selectedYearIndex = index;
                       selectedYear = years[index];
                     });
                   },
                   children: List.generate(years.length, (index) {
-                    final bool isSelected = selectedYear == years[index];
-                    return Text(
-                      years[index].toString(),
-                      style: context.textTheme.body22.copyWith(
-                        color: isSelected ? selectedColor : unselectedColor,
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
-                        fontSize: isSelected ? 26 : 18,
+                    final bool isSelected = index == _selectedYearIndex;
+                    return Center(
+                      child: Text(
+                        years[index].toString(),
+                        style: context.textTheme.body22.copyWith(
+                          color: isSelected ? selectedColor : unselectedColor,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.normal,
+                          fontSize: isSelected ? 26 : 18,
+                        ),
                       ),
                     );
                   }),

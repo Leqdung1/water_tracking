@@ -20,8 +20,12 @@ class StepAge extends StatelessWidget {
           description: t.core
               .age_also_have_impacts_to_your_body_s_hydration_needs_scroll_and_select_your_age_from_the_options_below,
           isEnabled: true,
-          child: const AgePicker(),
+          isCenter: true,
+          child: AgePicker(
+            selectedAge: state.userInfo?.age,
+          ),
           onPressed: () {
+            cubit.updateUserInfo(age: state.userInfo?.age);
             cubit.nextStep();
           },
         );

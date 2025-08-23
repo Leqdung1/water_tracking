@@ -68,7 +68,7 @@ class _StepWeightState extends State<StepWeight> {
                       ),
                       const Gap(16),
                       SizedBox(
-                        height: 220,
+                        height: 290,
                         child: Column(
                           children: [
                             WeightPicker(
