@@ -10,22 +10,20 @@ import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
 import '../cubit/survey_cubit.dart';
 
-class StepActivityLevel extends StatefulWidget {
-  const StepActivityLevel({super.key});
+class StepWeather extends StatefulWidget {
+  const StepWeather({super.key});
 
   @override
-  State<StepActivityLevel> createState() => _StepActivityLevelState();
+  State<StepWeather> createState() => _StepWeatherState();
 }
 
-class _StepActivityLevelState extends State<StepActivityLevel> {
-  final ValueNotifier<ActivityLevel?> selectedActivityLevel =
-      ValueNotifier(null);
+class _StepWeatherState extends State<StepWeather> {
+  final ValueNotifier<Weather?> selectedWeather = ValueNotifier(null);
 
   @override
   void initState() {
     super.initState();
-    selectedActivityLevel.value =
-        context.read<SurveyCubit>().state.userInfo?.activityLevel;
+    selectedWeather.value = context.read<SurveyCubit>().state.userInfo?.weather;
   }
 
   @override
@@ -35,18 +33,18 @@ class _StepActivityLevelState extends State<StepActivityLevel> {
         final cubit = context.read<SurveyCubit>();
 
         return ValueListenableBuilder(
-          valueListenable: selectedActivityLevel,
+          valueListenable: selectedWeather,
           builder: (context, value, child) {
             return StepWidget(
               isEnabled: value != null,
-              title: t.core.what_your_activity_level,
+              title: t.core.what_the_climate_weather_like_in_your_area,
               description: t.core
-                  .understanding_your_activity_is_vital_for_crafting_a_personalized_hydration_plan_pick_the_option_that_best_describes_your_typical_activity_level,
+                  .external_factors_like_weather_can_influence_your_hydration_needs_let_us_know_the_current_climate_in_your_area,
               isCenter: true,
-              child: _buildActivityLevelPicker(context, value),
+              child: _buildWeatherPicker(context, value),
               onPressed: () {
                 if (value != null) {
-                  cubit.updateActivityLevel(value);
+                  cubit.updateWeather(value);
                   cubit.nextStep();
                 }
               },
@@ -57,20 +55,19 @@ class _StepActivityLevelState extends State<StepActivityLevel> {
     );
   }
 
-  Widget _buildActivityLevelPicker(
-      BuildContext context, ActivityLevel? selectedLevel) {
+  Widget _buildWeatherPicker(BuildContext context, Weather? selectedLevel) {
     return SingleChildScrollView(
       child: Column(
-        children: ActivityLevel.values.map((activityLevel) {
-          final isSelected = selectedLevel == activityLevel;
+        children: Weather.values.map((weather) {
+          final isSelected = selectedLevel == weather;
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: GestureDetector(
-              onTap: () => selectedActivityLevel.value = activityLevel,
+              onTap: () => selectedWeather.value = weather,
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -85,7 +82,7 @@ class _StepActivityLevelState extends State<StepActivityLevel> {
                   children: [
                     // Icon
                     Image.asset(
-                      activityLevel.imagePath,
+                      weather.imagePath,
                       width: 40,
                       height: 40,
                       fit: BoxFit.contain,
@@ -97,17 +94,10 @@ class _StepActivityLevelState extends State<StepActivityLevel> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            activityLevel.name,
+                            weather.name,
                             style: context.textTheme.body17.copyWith(
                               color: AppThemeConst.neutralColor1,
                               fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const Gap(4),
-                          Text(
-                            activityLevel.description,
-                            style: context.textTheme.body15.copyWith(
-                              color: AppThemeConst.neutralColor2,
                             ),
                           ),
                         ],

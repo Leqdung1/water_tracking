@@ -32,19 +32,26 @@ class StepWidget extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              Text(
-                title,
-                style: context.textTheme.titleAppBar.copyWith(
-                  color: AppThemeConst.neutralColor1,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  title,
+                  style: context.textTheme.titleAppBar.copyWith(
+                    color: AppThemeConst.neutralColor1,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Gap(16),
-              Text(
-                description,
-                style: context.textTheme.body17.copyWith(
-                  color: AppThemeConst.neutralColor2,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  description,
+                  style: context.textTheme.body17.copyWith(
+                    color: AppThemeConst.neutralColor2,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
               Gap(16),
               _buildChildLayout(),

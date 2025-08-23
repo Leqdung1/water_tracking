@@ -56,4 +56,8 @@ class SurveyCubit extends Cubit<SurveyState> {
     emit(state.copyWith(
         userInfo: state.userInfo?.copyWith(activityLevel: activityLevel)));
   }
+
+  void updateWeather(Weather weather) {
+    emit(state.copyWith(userInfo: state.userInfo?.copyWith(weather: weather)));
+  }
 }
