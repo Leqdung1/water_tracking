@@ -30,7 +30,8 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   void updateHeightCm(double heightCm) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(heightCm: heightCm)));
+    emit(
+        state.copyWith(userInfo: state.userInfo?.copyWith(heightCm: heightCm)));
   }
 
   void updateWeightUnit(WeightUnit unit) {
@@ -38,7 +39,8 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   void updateWeightKg(double weightKg) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(weightKg: weightKg)));
+    emit(
+        state.copyWith(userInfo: state.userInfo?.copyWith(weightKg: weightKg)));
   }
 
   void updateAge(int age) {
@@ -46,7 +48,12 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   void updateTimeWakeUp(DateTime timeWakeUp) {
-    emit(state.copyWith(userInfo: state.userInfo?.copyWith(timeWakeUp: timeWakeUp)));
+    emit(state.copyWith(
+        userInfo: state.userInfo?.copyWith(timeWakeUp: timeWakeUp)));
   }
 
+  void updateActivityLevel(ActivityLevel activityLevel) {
+    emit(state.copyWith(
+        userInfo: state.userInfo?.copyWith(activityLevel: activityLevel)));
+  }
 }

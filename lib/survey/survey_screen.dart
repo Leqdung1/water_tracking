@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_tracking/survey/cubit/survey_cubit.dart';
 import 'package:water_tracking/survey/widgets/progress_tracker.dart';
+import 'package:water_tracking/survey/widgets/step_activity_level.dart';
 import 'package:water_tracking/survey/widgets/step_gender.dart';
 import 'package:water_tracking/survey/widgets/step_tall.dart';
 import 'package:water_tracking/survey/widgets/step_weight.dart';
@@ -31,6 +32,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     const StepTall(),
     const StepWeight(),
     const StepAge(),
+    const StepActivityLevel(),
   ];
 
   @override
