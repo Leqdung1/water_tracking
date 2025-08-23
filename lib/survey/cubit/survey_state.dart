@@ -6,48 +6,29 @@ class SurveyState extends Equatable {
     this.totalStep = 8,
     this.status = BlocStatus.initial,
     this.message = '',
-    this.gender,
-    this.heightCm,
-    this.heightUnit = HeightUnit.cm,
-    this.weightKg,
-    this.weightUnit = WeightUnit.kg,
-    this.age,
+    this.userInfo,
   });
 
   final int step;
   final int totalStep;
   final BlocStatus status;
   final String message;
-  final Gender? gender;
-  final int? heightCm; // stored in centimeters
-  final HeightUnit heightUnit;
-  final int? weightKg; // stored in kilograms
-  final WeightUnit weightUnit;
-  final int? age;
+  final UserInfoEntity? userInfo;
+
 
   SurveyState copyWith({
     int? step,
     int? totalStep,
     BlocStatus? status,
     String? message,
-    Gender? gender,
-    int? heightCm,
-    HeightUnit? heightUnit,
-    int? weightKg,
-    WeightUnit? weightUnit,
-    int? age,
+    UserInfoEntity? userInfo,
   }) {
     return SurveyState(
       step: step ?? this.step,
       totalStep: totalStep ?? this.totalStep,
       status: status ?? this.status,
       message: message ?? this.message,
-      gender: gender ?? this.gender,
-      heightCm: heightCm ?? this.heightCm,
-      heightUnit: heightUnit ?? this.heightUnit,
-      weightKg: weightKg ?? this.weightKg,
-      weightUnit: weightUnit ?? this.weightUnit,
-      age: age ?? this.age,
+      userInfo: userInfo ?? this.userInfo,
     );
   }
 
@@ -57,11 +38,6 @@ class SurveyState extends Equatable {
         totalStep,
         status,
         message,
-        gender,
-        heightCm,
-        heightUnit,
-        weightKg,
-        weightUnit,
-        age,
+        userInfo,
       ];
 }

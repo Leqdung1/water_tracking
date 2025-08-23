@@ -22,12 +22,14 @@ class _AgePickerState extends State<AgePicker> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       builder: (context, state) {
         final cubit = context.read<SurveyCubit>();
-        final int selectedAge = state.age ?? 25;
+        final int selectedAge = state.userInfo?.age ?? 25;
         final List<int> ages =
             List<int>.generate(100 - 12 + 1, (i) => 12 + i); // 12..100
         final int initialIndex = (selectedAge - 12).clamp(0, ages.length - 1);
 
-        return Expanded(
+        return SizedBox(
+          height: 220,
+          width: 100,
           child: CupertinoPicker(
             itemExtent: itemExtent,
             scrollController:
@@ -44,7 +46,7 @@ class _AgePickerState extends State<AgePicker> {
             onSelectedItemChanged: (index) => cubit.updateAge(ages[index]),
             children: List.generate(ages.length, (index) {
               final value = ages[index];
-              final isSelected = (state.age ?? selectedAge) == value;
+              final isSelected = (state.userInfo?.age ?? selectedAge) == value;
               return Center(
                 child: Text(
                   value.toString(),

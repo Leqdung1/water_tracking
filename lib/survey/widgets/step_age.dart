@@ -19,15 +19,8 @@ class StepAge extends StatelessWidget {
           title: t.core.how_old_are_you,
           description: t.core
               .age_also_have_impacts_to_your_body_s_hydration_needs_scroll_and_select_your_age_from_the_options_below,
-          isEnabled: state.age != null,
-          child: const SizedBox(
-            height: 220,
-            child: Column(
-              children: [
-                AgePicker(),
-              ],
-            ),
-          ),
+          isEnabled: true,
+          child: const AgePicker(),
           onPressed: () {
             cubit.nextStep();
           },

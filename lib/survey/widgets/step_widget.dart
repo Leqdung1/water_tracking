@@ -13,6 +13,7 @@ class StepWidget extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
   final bool isEnabled;
+  final bool isCenter;
   const StepWidget({
     super.key,
     required this.title,
@@ -20,6 +21,7 @@ class StepWidget extends StatelessWidget {
     required this.child,
     required this.onPressed,
     this.isEnabled = true,
+    this.isCenter = false,
   });
 
   @override
@@ -29,7 +31,6 @@ class StepWidget extends StatelessWidget {
       children: [
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 title,
@@ -46,17 +47,39 @@ class StepWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Gap(16),
-              child,
+              _buildChildLayout(),
             ],
           ),
         ),
         SafeArea(
-          child: AppButton(
-            onTap: onPressed,
-            title: t.core.continue_text,
-            isEnabled: isEnabled,
+          child: Container(
+            padding: const EdgeInsets.only(top: 16),
+            decoration: BoxDecoration(
+              border: Border(
+                  top: BorderSide(
+                      color: AppThemeConst.neutralColor2.withOpacity(0.2))),
+            ),
+            child: AppButton(
+              onTap: onPressed,
+              title: t.core.continue_text,
+              isEnabled: isEnabled,
+            ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildChildLayout() {
+    if (isCenter) {
+      return child;
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        child,
+        Gap(16),
       ],
     );
   }

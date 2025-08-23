@@ -10,8 +10,21 @@ import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
 import '../cubit/survey_cubit.dart';
 
-class StepGender extends StatelessWidget {
+class StepGender extends StatefulWidget {
   const StepGender({super.key});
+
+  @override
+  State<StepGender> createState() => _StepGenderState();
+}
+
+class _StepGenderState extends State<StepGender> {
+  final ValueNotifier<Gender?> selectedGender = ValueNotifier(null);
+
+  @override
+  void initState() {
+    super.initState();
+    selectedGender.value = context.read<SurveyCubit>().state.userInfo?.gender;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,61 +32,69 @@ class StepGender extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<SurveyCubit>();
 
-        return StepWidget(
-          isEnabled: state.gender != null,
-          title: t.core.what_is_your_gender,
-          description:
-              t.core.hydrify_is_here_to_tailor_a_hydration_plan_just_for_you,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        return ValueListenableBuilder(
+          valueListenable: selectedGender,
+          builder: (context, value, child) {
+            return StepWidget(
+              isEnabled: value != null,
+              title: t.core.what_is_your_gender,
+              description:
+                  t.core.hydrify_is_here_to_tailor_a_hydration_plan_just_for_you,
+              isCenter: true,
+              child: Column(
                 children: [
-                  _buildGenderItem(context,
-                      gender: Gender.male,
-                      isSelected: state.gender == Gender.male),
-                  _buildGenderItem(context,
-                      gender: Gender.female,
-                      isSelected: state.gender == Gender.female),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildGenderItem(context,
+                          gender: Gender.male,
+                          isSelected: value == Gender.male,
+                          onTap: () => selectedGender.value = Gender.male),
+                      _buildGenderItem(context,
+                          gender: Gender.female,
+                          isSelected: value == Gender.female,
+                          onTap: () => selectedGender.value = Gender.female),
+                    ],
+                  ),
+                  Gap(32),
+                  GestureDetector(
+                    onTap: () => selectedGender.value = Gender.preferNotToSay,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: value == Gender.preferNotToSay
+                            ? AppThemeConst.primaryColor
+                            : Colors.transparent,
+                        border: Border.all(
+                          color: value == Gender.preferNotToSay
+                              ? AppThemeConst.primaryColor
+                              : AppThemeConst.neutralColor2.withOpacity(0.3),
+                        ),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Text(
+                        t.core.prefer_not_to_say,
+                        style: context.textTheme.body17.copyWith(
+                          color: value == Gender.preferNotToSay
+                              ? Colors.white
+                              : AppThemeConst.neutralColor1,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              Gap(32),
-              GestureDetector(
-                onTap: () => cubit.updateGender(Gender.preferNotToSay),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: state.gender == Gender.preferNotToSay
-                        ? AppThemeConst.primaryColor
-                        : Colors.transparent,
-                    border: Border.all(
-                      color: state.gender == Gender.preferNotToSay
-                          ? AppThemeConst.primaryColor
-                          : AppThemeConst.neutralColor2.withOpacity(0.3),
-                    ),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Text(
-                    t.core.prefer_not_to_say,
-                    style: context.textTheme.body17.copyWith(
-                      color: state.gender == Gender.preferNotToSay
-                          ? Colors.white
-                          : AppThemeConst.neutralColor1,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          onPressed: () {
-            cubit.nextStep();
-            if (state.gender == null) {
-              cubit.updateGender(state.gender!);
-            }
-          },
+              onPressed: () {
+                if (value != null) {
+                  cubit.updateGender(value);
+                  cubit.nextStep();
+                }
+              },
+            );
+          }
         );
       },
     );
@@ -83,9 +104,10 @@ class StepGender extends StatelessWidget {
     BuildContext context, {
     required Gender gender,
     required bool isSelected,
+    required VoidCallback onTap,
   }) {
     return GestureDetector(
-      onTap: () => context.read<SurveyCubit>().updateGender(gender),
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

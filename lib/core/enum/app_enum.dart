@@ -149,3 +149,50 @@ enum Month {
 enum HeightUnit { cm, ft }
 
 enum WeightUnit { kg, lb }
+
+enum ActivityLevel {
+  sedentary,
+  light,
+  moderate,
+  veryActive;
+
+  String get name => switch (this) {
+        sedentary => t.core.sedentary,
+        light => t.core.light_activity,
+        moderate => t.core.moderate_active,
+        veryActive => t.core.very_active,
+      };
+
+  String get description => switch (this) {
+        sedentary => t.core.limited_physical_activity_mostly_sitting_or_lying_down,
+        light => t.core.some_movement_throughout_the_day_such_as_light_walking_or_occasional_standing,
+        moderate => t.core.regular_exercise_or_physical_activity_such_as_jogging_or_cycling,
+        veryActive => t.core.intense_physical_activity_or_training_such_as_heavy_lifting_or_high_intensity_training,
+      };
+
+      String get imagePath => switch (this) {
+        sedentary => AssetPathConst.imgSedentary,
+        light => AssetPathConst.imgRun,
+        moderate => AssetPathConst.imgPowerLifting,
+        veryActive => AssetPathConst.imgWalk,
+      };
+}
+
+
+enum Weather {
+  hot, 
+  temperate, 
+  cold;
+
+  String get name => switch (this) {
+        hot => t.core.hot,
+        temperate => t.core.temperate,
+        cold => t.core.cold,
+      };
+
+  String get imagePath => switch (this) {
+        hot => AssetPathConst.imgSun,
+        temperate => AssetPathConst.imgCloud,
+        cold => AssetPathConst.imgSnow,
+      };
+}

@@ -48,12 +48,19 @@ class _SurveyScreenState extends State<SurveyScreen> {
   }
 
   void _goToStep(int step) {
-    _pageController.animateToPage(
-      step,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.ease,
-    );
-    surveyCubit.goToStep(step);
+    if (_pageController.hasClients && step < _steps.length) {
+      // Add a small delay to ensure layout stability
+      Future.delayed(const Duration(milliseconds: 50), () {
+        if (_pageController.hasClients) {
+          _pageController.animateToPage(
+            step,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.ease,
+          );
+          surveyCubit.goToStep(step);
+        }
+      });
+    }
   }
 
   @override
@@ -63,7 +70,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
       child: BlocConsumer<SurveyCubit, SurveyState>(
         listener: (context, state) {
           if (_pageController.hasClients &&
-              _pageController.page?.round() != state.step) {
+              _pageController.page?.round() != state.step &&
+              state.step < _steps.length) {
             _goToStep(state.step);
           }
         },
@@ -97,9 +105,12 @@ class _SurveyScreenState extends State<SurveyScreen> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: _steps.length,
-              itemBuilder: (context, index) => _steps[index],
+              itemBuilder: (context, index) {
+                if (index >= _steps.length) return const SizedBox.shrink();
+                return _steps[index];
+              },
               onPageChanged: (index) {
-                if (index != state.step) {
+                if (index != state.step && index < _steps.length) {
                   surveyCubit.goToStep(index);
                 }
               },

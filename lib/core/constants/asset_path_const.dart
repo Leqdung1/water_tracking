@@ -24,6 +24,13 @@ class AssetPathConst {
   static const String imgThin = 'assets/images/img_thin.png';
   static const String imgFat = 'assets/images/img_fat.png';
   static const String imgNormal = 'assets/images/img_normal.png';
+  static const String imgSedentary = 'assets/images/img_sedentary.png';
+  static const String imgRun = 'assets/images/img_run.png';
+  static const String imgPowerLifting = 'assets/images/img_powerlifting.png';
+  static const String imgWalk = 'assets/images/img_walk.png';
+  static const String imgSun = 'assets/images/img_sun.png';
+  static const String imgCloud = 'assets/images/img_cloud.png';
+  static const String imgSnow = 'assets/images/img_snow.png';
 
 // ------------------------- Animations ------------------------- //
   static const String animationLoading = 'assets/animations/anim_loading.json';
