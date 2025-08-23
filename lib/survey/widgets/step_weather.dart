@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
+import 'package:water_tracking/survey/widgets/generating_plant.dart';
 import 'package:water_tracking/survey/widgets/step_widget.dart';
 
 import '../../core/constants/app_theme_const.dart';
@@ -45,7 +46,11 @@ class _StepWeatherState extends State<StepWeather> {
               onPressed: () {
                 if (value != null) {
                   cubit.updateWeather(value);
-                  cubit.nextStep();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GeneratingPlant()),
+                  );
                 }
               },
             );

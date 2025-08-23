@@ -12,6 +12,13 @@ extension TextThemeExt on TextTheme {
         color: AppThemeConst.neutralColor1,
       );
 
+  TextStyle get largeTitle2 => TextStyle(
+        fontSize: 35,
+        fontWeight: FontWeight.bold,
+        fontFamily: _fontFamily,
+        color: AppThemeConst.neutralColor1,
+      );
+
   TextStyle get bodySmall => TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.normal,

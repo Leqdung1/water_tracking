@@ -151,6 +151,7 @@ class TranslationsCoreEn {
 	String get adjust => 'Adjust';
 	String get continue_text => 'Continue';
 	String get external_factors_like_weather_can_influence_your_hydration_needs_let_us_know_the_current_climate_in_your_area => 'External factors like weather can influence your hydration needs. Let us know the current climate in your area:';
+	String get please_wait => 'Please wait...';
 }
 
 /// Flat map(s) containing all translations.
@@ -260,6 +261,7 @@ extension on Translations {
 			case 'core.adjust': return 'Adjust';
 			case 'core.continue_text': return 'Continue';
 			case 'core.external_factors_like_weather_can_influence_your_hydration_needs_let_us_know_the_current_climate_in_your_area': return 'External factors like weather can influence your hydration needs. Let us know the current climate in your area:';
+			case 'core.please_wait': return 'Please wait...';
 			default: return null;
 		}
 	}

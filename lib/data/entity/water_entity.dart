@@ -1,14 +1,22 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'water_entity.g.dart';
+
+@HiveType(typeId: 1)
 class WaterEntity extends Equatable {
+  @HiveField(0)
   final String id;
-  final DateTime date;
+  @HiveField(1)
+  final DateTime createdAt;
+  @HiveField(2)
   final double totalWaterMl;
+  @HiveField(3)
   final double targetWaterMl;
 
   const WaterEntity({
     required this.id,
-    required this.date,
+    required this.createdAt,
     required this.totalWaterMl,
     required this.targetWaterMl,
   });
@@ -18,13 +26,13 @@ class WaterEntity extends Equatable {
 
   WaterEntity copyWith({
     String? id,
-    DateTime? date,
+    DateTime? createdAt,
     double? totalWaterMl,
     double? targetWaterMl,
   }) {
     return WaterEntity(
       id: id ?? this.id,
-      date: date ?? this.date,
+      createdAt: createdAt ?? this.createdAt,
       totalWaterMl: totalWaterMl ?? this.totalWaterMl,
       targetWaterMl: targetWaterMl ?? this.targetWaterMl,
     );
@@ -33,7 +41,7 @@ class WaterEntity extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        date,
+        createdAt,
         totalWaterMl,
         targetWaterMl,
       ];
