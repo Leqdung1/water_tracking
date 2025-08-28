@@ -2,12 +2,16 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../core/enum/app_enum.dart';
-import '../../data/entity/user_info_entity.dart';
+import '../../domain/entity/user_info_entity.dart';
+import '../../domain/entity/water_entity.dart';
+import '../../domain/repository/water_repository.dart';
 
 part 'survey_state.dart';
 
 class SurveyCubit extends Cubit<SurveyState> {
   SurveyCubit() : super(const SurveyState());
+
+  final WaterRepository waterRepository = WaterRepository();
 
   // --------------------------  STEP -------------------------- //
   void nextStep() {
@@ -53,4 +57,16 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   // --------------------------  WATER -------------------------- //
+  Future<void> saveWater(double targetWaterMl) async {
+    try {
+      await waterRepository.save(WaterEntity(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        createdAt: DateTime.now(),
+        targetWaterMl: targetWaterMl,
+        totalWaterMl: 0,
+      ));
+    } catch (e) {
+      emit(state.copyWith(status: BlocStatus.error, message: e.toString()));
+    }
+  }
 }

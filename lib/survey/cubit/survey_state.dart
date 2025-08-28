@@ -7,6 +7,7 @@ class SurveyState extends Equatable {
     this.status = BlocStatus.initial,
     this.message = '',
     this.userInfo,
+    this.water,
   });
 
   final int step;
@@ -14,6 +15,7 @@ class SurveyState extends Equatable {
   final BlocStatus status;
   final String message;
   final UserInfoEntity? userInfo;
+  final WaterEntity? water;
 
 
   SurveyState copyWith({
@@ -22,6 +24,7 @@ class SurveyState extends Equatable {
     BlocStatus? status,
     String? message,
     UserInfoEntity? userInfo,
+    WaterEntity? water,
   }) {
     return SurveyState(
       step: step ?? this.step,
@@ -29,6 +32,7 @@ class SurveyState extends Equatable {
       status: status ?? this.status,
       message: message ?? this.message,
       userInfo: userInfo ?? this.userInfo,
+      water: water ?? this.water,
     );
   }
 
@@ -39,5 +43,6 @@ class SurveyState extends Equatable {
         status,
         message,
         userInfo,
+        water,
       ];
 }

@@ -4,7 +4,7 @@ import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
 
 import '../../../core/constants/app_theme_const.dart';
-import '../../../data/entity/chart_data.dart';
+import '../../../domain/entity/chart_data.dart';
 
 class LineChart extends StatelessWidget {
   const LineChart({super.key});

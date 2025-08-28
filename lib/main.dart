@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:water_tracking/core/constants/app_theme_const.dart';
 import 'package:water_tracking/core/observer/bloc_observer.dart';
+import 'package:water_tracking/data/local/hive/hive_init.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/history/history_screen.dart';
 import 'package:water_tracking/screens/home/home_screen.dart';
@@ -24,6 +25,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
+  await HiveInit.init();
   runApp(TranslationProvider(child: const MyApp()));
 }
 

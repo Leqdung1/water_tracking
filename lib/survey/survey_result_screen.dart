@@ -11,6 +11,7 @@ import 'package:water_tracking/widgets/button/app_button.dart';
 import '../core/constants/app_theme_const.dart';
 import '../core/enum/app_enum.dart';
 import '../i18n/strings.g.dart';
+import '../screens/main/main_screen.dart';
 import 'widgets/adjust_button.dart';
 import 'widgets/water_goal_display.dart';
 import 'widgets/water_unit_selector.dart';
@@ -25,11 +26,13 @@ class SurveyResultScreen extends StatefulWidget {
 class _SurveyResultScreenState extends State<SurveyResultScreen> {
   final ValueNotifier<WaterUnit> selectedUnit = ValueNotifier(WaterUnit.ml);
   late final ValueNotifier<double> waterGoal;
+  late final SurveyCubit surveyCubit;
 
   @override
   void initState() {
     super.initState();
     _initWaterGoal();
+    surveyCubit = context.read<SurveyCubit>();
   }
 
   void _initWaterGoal() {
@@ -109,7 +112,16 @@ class _SurveyResultScreenState extends State<SurveyResultScreen> {
                     ),
                   ),
                   child: AppButton(
-                    onTap: () {},
+                    onTap: () async {
+                      await surveyCubit.saveWater(waterGoal.value);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                     title: t.core.lets_hydrate,
                     isEnabled: true,
                   ),
