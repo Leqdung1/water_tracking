@@ -39,6 +39,7 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: context.textTheme.titleAppBar,
       ),
       centerTitle: true,
+      surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: bottomSection != null ? bottomSection! : SizedBox.shrink(),

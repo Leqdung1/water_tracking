@@ -1,6 +1,5 @@
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../../core/constants/app_theme_const.dart';
 
@@ -70,69 +69,8 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
         ),
       ),
     );
+
+    
   }
 
-  // ------------------------------- Custom Day Item ------------------------------- //
-  Widget _buildCustomDay(
-    BuildContext context,
-    DateTime day,
-    bool isSelected,
-    bool showFishIcon,
-  ) {
-    final dayName = DateFormat('EEE').format(day);
-    final dayNumber = day.day.toString();
-
-    return Container(
-      margin: EdgeInsets.all(4),
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(
-            vertical: 8,
-          ),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? AppThemeConst.primaryColor
-                : AppThemeConst.neutralColor3,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: isSelected
-                  ? AppThemeConst.primaryColor
-                  : AppThemeConst.neutralColor.withAlpha(50),
-              width: 1,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                dayName,
-                style: TextStyle(
-                  color: isSelected
-                      ? AppThemeConst.neutralColor1
-                      : AppThemeConst.neutralColor2,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                dayNumber,
-                style: TextStyle(
-                  color: isSelected
-                      ? AppThemeConst.neutralColor1
-                      : AppThemeConst.neutralColor2,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }

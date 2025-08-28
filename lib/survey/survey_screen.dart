@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_tracking/survey/cubit/survey_cubit.dart';
-import 'package:water_tracking/survey/widgets/generating_plant.dart';
 import 'package:water_tracking/survey/widgets/progress_tracker.dart';
 import 'package:water_tracking/survey/widgets/step_activity_level.dart';
 import 'package:water_tracking/survey/widgets/step_gender.dart';

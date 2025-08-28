@@ -67,7 +67,7 @@ class _TimePickerState extends State<TimePicker> {
     final double pickerHeight = 220;
     final double itemExtent = 44;
 
-    return Container(
+    return SizedBox(
       height: pickerHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

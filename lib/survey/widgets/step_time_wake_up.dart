@@ -23,7 +23,7 @@ class _StepTimeWakeUpState extends State<StepTimeWakeUp> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = context.read<SurveyCubit>().state;
       if (state.userInfo?.timeWakeUp != null) {
-        final dateTime = state.userInfo!.timeWakeUp!;
+        final dateTime = state.userInfo!.timeWakeUp;
         selectedTime.value =
             TimeOfDay(hour: dateTime.hour, minute: dateTime.minute);
       }
