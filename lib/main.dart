@@ -7,6 +7,7 @@ import 'package:water_tracking/core/observer/bloc_observer.dart';
 import 'package:water_tracking/data/local/hive/hive_init.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/history/history_screen.dart';
+import 'package:water_tracking/screens/home/cubit/cubit/home_cubit.dart';
 import 'package:water_tracking/screens/home/home_screen.dart';
 import 'package:water_tracking/screens/login/cubit/login_cubit.dart';
 import 'package:water_tracking/screens/login/login_screen.dart';
@@ -16,6 +17,7 @@ import 'package:water_tracking/screens/register/register_screen.dart';
 import 'package:water_tracking/screens/report/report_screen.dart';
 import 'package:water_tracking/screens/setting/setting_screen.dart';
 import 'package:water_tracking/screens/splash/splash_screen.dart';
+import 'package:water_tracking/screens/switch_cup_size/cubit/cubit/switch_cup_size_cubit.dart';
 import 'package:water_tracking/screens/switch_cup_size/switch_cup_size_screen.dart';
 import 'package:water_tracking/survey/cubit/survey_cubit.dart';
 import 'package:water_tracking/survey/survey_result_screen.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         locale: TranslationProvider.of(context).flutterLocale,
         supportedLocales: AppLocaleUtils.supportedLocales,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        title: 'Flutter Demo',
+        title: 'Water Tracking',
         theme: ThemeData(
           scaffoldBackgroundColor: AppThemeConst.backgroundColor,
           appBarTheme: AppBarTheme(
@@ -62,11 +64,17 @@ class MyApp extends StatelessWidget {
                 create: (context) => RegisterCubit(),
                 child: const RegisterScreen(),
               ),
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => BlocProvider(
+                create: (context) => HomeCubit(),
+                child: const HomeScreen(),
+              ),
           '/history': (context) => const HistoryScreen(),
           '/report': (context) => const ReportScreen(),
           '/setting': (context) => const SettingScreen(),
-          '/switch_cup_size': (context) => const SwitchCupSizeScreen(),
+          '/switch_cup_size': (context) => BlocProvider(
+                create: (context) => SwitchCupSizeCubit(),
+                child: const SwitchCupSizeScreen(),
+              ),
           '/survey_result': (context) => const SurveyResultScreen(),
         });
   }

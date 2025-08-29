@@ -8,7 +8,7 @@ import '../../i18n/strings.g.dart';
 import '../../widgets/appbar/app_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key,});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

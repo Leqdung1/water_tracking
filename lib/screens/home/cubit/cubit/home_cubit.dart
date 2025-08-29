@@ -28,4 +28,8 @@ class HomeCubit extends Cubit<HomeState> {
       );
     }
   }
+
+  void setCupSize(CupSize cupSize) {
+    emit(state.copyWith(cupSize: cupSize));
+  }
 }

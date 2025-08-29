@@ -8,6 +8,7 @@ import 'package:water_tracking/widgets/button/app_button.dart';
 import 'dart:math' as math;
 
 import '../../../core/constants/app_theme_const.dart';
+import '../../../core/enum/app_enum.dart';
 import '../../../i18n/strings.g.dart';
 import '../cubit/cubit/home_cubit.dart';
 

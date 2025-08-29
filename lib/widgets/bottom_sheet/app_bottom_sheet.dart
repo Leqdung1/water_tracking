@@ -34,71 +34,73 @@ class AppBottomSheet extends StatelessWidget {
           topRight: Radius.circular(12),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // ------------------------------------ Header ------------------------------------ //
-          Gap(16),
-          Container(
-            height: 3,
-            width: 40,
-            decoration: BoxDecoration(
-              color: AppThemeConst.neutralColor.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(100),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // ------------------------------------ Header ------------------------------------ //
+            Gap(16),
+            Container(
+              height: 3,
+              width: 40,
+              decoration: BoxDecoration(
+                color: AppThemeConst.neutralColor.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(100),
+              ),
             ),
-          ),
-          Gap(16),
-          Text(
-            title,
-            style: context.textTheme.body22.copyWith(
-              color: AppThemeConst.neutralColor1,
+            Gap(16),
+            Text(
+              title,
+              style: context.textTheme.body22.copyWith(
+                color: AppThemeConst.neutralColor1,
+              ),
             ),
-          ),
-          Gap(
-            16,
-          ),
-          Divider(
-            thickness: 0.7,
-            color: AppThemeConst.neutralColor,
-          ),
-          // ------------------------------------ Body ------------------------------------ //
-          Gap(16),
-          widget,
-          Gap(16),
+            Gap(
+              16,
+            ),
+            Divider(
+              thickness: 0.7,
+              color: AppThemeConst.neutralColor,
+            ),
+            // ------------------------------------ Body ------------------------------------ //
+            Gap(16),
+            widget,
+            Gap(16),
 
-          Divider(
-            thickness: 0.7,
-            color: AppThemeConst.neutralColor,
-          ),
-          Gap(32),
-          // ------------------------------------ Button ------------------------------------ //
-          SafeArea(
-            child: Row(
-              children: [
-                Expanded(
-                  child: AppButton(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    margin: EdgeInsets.zero,
-                    color: AppThemeConst.primaryColor.withOpacity(0.18),
-                    onTap: onCancel ,
-                    title: cancelText ?? t.core.cancel,
-                    textColor: AppThemeConst.primaryColor,
-                  ),
-                ),
-                Gap(16),
-                Expanded(
-                  child: AppButton(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    margin: EdgeInsets.zero,
-                    onTap: onSave,
-                    title: saveText ?? t.core.save,
-                  ),
-                ),
-              ],
+            Divider(
+              thickness: 0.7,
+              color: AppThemeConst.neutralColor,
             ),
-          )
-        ],
+            Gap(32),
+            // ------------------------------------ Button ------------------------------------ //
+            SafeArea(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: AppButton(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      margin: EdgeInsets.zero,
+                      color: AppThemeConst.primaryColor.withOpacity(0.18),
+                      onTap: onCancel,
+                      title: cancelText ?? t.core.cancel,
+                      textColor: AppThemeConst.primaryColor,
+                    ),
+                  ),
+                  Gap(16),
+                  Expanded(
+                    child: AppButton(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      margin: EdgeInsets.zero,
+                      onTap: onSave,
+                      title: saveText ?? t.core.save,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

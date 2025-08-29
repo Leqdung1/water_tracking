@@ -1,32 +1,29 @@
-part of 'home_cubit.dart';
+part of 'switch_cup_size_cubit.dart';
 
-class HomeState extends Equatable {
+class SwitchCupSizeState extends Equatable {
   final BlocStatus status;
   final String? message;
   final WaterEntity? water;
-  final CupSize cupSize;
 
-  const HomeState({
+  const SwitchCupSizeState({
     this.status = BlocStatus.initial,
     this.message,
     this.water,
-    this.cupSize = CupSize.cup100,
   });
 
-  HomeState copyWith({
+  SwitchCupSizeState copyWith({
     BlocStatus? status,
     String? message,
     WaterEntity? water,
-    CupSize? cupSize,
   }) {
-    return HomeState(
+    return SwitchCupSizeState(
       status: status ?? this.status,
       message: message ?? this.message,
       water: water ?? this.water,
-      cupSize: cupSize ?? this.cupSize,
     );
   }
 
   @override
-  List<Object?> get props => [status, message, water, cupSize];
+  List<Object?> get props => [status, message, water];
 }
+
