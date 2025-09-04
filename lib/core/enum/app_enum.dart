@@ -52,23 +52,6 @@ enum CupSize {
         cup600 => 600,
       };
 
-  // Get recommended cup sizes based on daily water goal
-  static List<CupSize> getRecommendedCups(double dailyGoalMl) {
-    if (dailyGoalMl <= 1000) {
-      // Small goal: Use smaller cups (100-200mL)
-      return [CupSize.cup100, CupSize.cup150, CupSize.cup200];
-    } else if (dailyGoalMl <= 2000) {
-      // Medium goal: Use medium cups (150-250mL)
-      return [CupSize.cup150, CupSize.cup200, CupSize.cup250];
-    } else if (dailyGoalMl <= 3000) {
-      // Large goal: Use larger cups (200-500mL)
-      return [CupSize.cup200, CupSize.cup250, CupSize.cup500];
-    } else {
-      // Very large goal: Use largest cups (250-600mL)
-      return [CupSize.cup250, CupSize.cup500, CupSize.cup600];
-    }
-  }
-
   // Get primary recommended cup based on daily goal
   static CupSize getPrimaryCup(double dailyGoalMl) {
     if (dailyGoalMl <= 1000) {
@@ -80,11 +63,6 @@ enum CupSize {
     } else {
       return CupSize.cup500; // Very large goal: 500mL cup
     }
-  }
-
-  // Calculate how many cups needed to reach daily goal
-  static int getCupsNeeded(double dailyGoalMl, CupSize cupSize) {
-    return (dailyGoalMl / cupSize.volume).ceil();
   }
 }
 

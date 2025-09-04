@@ -65,8 +65,14 @@ class SurveyCubit extends Cubit<SurveyState> {
         targetWaterMl: targetWaterMl,
         totalWaterMl: 0,
       ));
+      await getWater();
     } catch (e) {
       emit(state.copyWith(status: BlocStatus.error, message: e.toString()));
     }
+  }
+
+  Future<void> getWater() async {
+    final water = await waterRepository.getAll();
+    emit(state.copyWith(water: water.last));
   }
 }
