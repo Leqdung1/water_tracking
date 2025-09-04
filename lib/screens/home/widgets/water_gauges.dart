@@ -49,8 +49,12 @@ class WaterGauges extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppButton(
-                    onTap: () {},
-                    title: t.core.drink_n_mL(n: 12),
+                    onTap: () {
+                      // TODO: call cubit to add water
+                    },
+                    title: t.core.drink_n_mL(
+                      n: state.water?.cupSize?.volume ?? 0,
+                    ),
                   ),
                   CupType(),
                 ],

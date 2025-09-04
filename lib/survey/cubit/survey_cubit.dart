@@ -59,11 +59,15 @@ class SurveyCubit extends Cubit<SurveyState> {
   // --------------------------  WATER -------------------------- //
   Future<void> saveWater(double targetWaterMl) async {
     try {
+      // Get recommended cup size based on water goal
+      final recommendedCupSize = CupSize.getPrimaryCup(targetWaterMl);
+
       await waterRepository.save(WaterEntity(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         createdAt: DateTime.now(),
         targetWaterMl: targetWaterMl,
         totalWaterMl: 0,
+        cupSize: recommendedCupSize,
       ));
       await getWater();
     } catch (e) {

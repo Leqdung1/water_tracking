@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../../i18n/strings.g.dart';
 import '../constants/asset_path_const.dart';
+
+part 'app_enum.g.dart';
 
 enum BlocStatus {
   initial,
@@ -17,12 +20,19 @@ enum MainTab {
   setting,
 }
 
+@HiveType(typeId: 2)
 enum CupSize {
+  @HiveField(0)
   cup100,
+  @HiveField(1)
   cup150,
+  @HiveField(2)
   cup200,
+  @HiveField(4)
   cup250,
+  @HiveField(5)
   cup500,
+  @HiveField(6)
   cup600;
 
   String get imagePath => switch (this) {

@@ -12,12 +12,24 @@ class HomeCubit extends Cubit<HomeState> {
 
   final WaterRepository waterRepository = WaterRepository();
 
+  /// Load the latest daily water entry (from survey or last session)
   Future<void> getWater() async {
     try {
-      final water = await waterRepository.getAll();
+      final waterList = await waterRepository.getAll();
+
+      if (waterList.isEmpty) {
+        emit(state.copyWith(
+          status: BlocStatus.error,
+          water: null,
+          message: 'No daily goal found. Please complete the survey first.',
+        ));
+        return;
+      }
+
+      final latest = waterList.last;
       emit(state.copyWith(
         status: BlocStatus.success,
-        water: water.last,
+        water: latest,
       ));
     } catch (e) {
       emit(
@@ -29,7 +41,58 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  /// Select a preferred cup size (used for quick-add button)
   void setCupSize(CupSize cupSize) {
     emit(state.copyWith(cupSize: cupSize));
   }
+
+  /// Add water to today’s total
+  Future<void> addWater(int volumeMl) async {
+    try {
+      final current = state.water;
+      if (current == null) return;
+
+      final updated = current.copyWith(
+        totalWaterMl: current.totalWaterMl + volumeMl,
+      );
+
+      await waterRepository.update(updated);
+
+      emit(state.copyWith(
+        status: BlocStatus.success,
+        water: updated,
+      ));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: BlocStatus.error,
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  /// Reset today’s progress back to zero
+  Future<void> resetToday() async {
+    try {
+      final current = state.water;
+      if (current == null) return;
+
+      final reset = current.copyWith(totalWaterMl: 0);
+      await waterRepository.update(reset);
+
+      emit(state.copyWith(
+        status: BlocStatus.success,
+        water: reset,
+      ));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: BlocStatus.error,
+          message: e.toString(),
+        ),
+      );
+    }
+  }
 }
+

@@ -113,7 +113,9 @@ class _SurveyResultScreenState extends State<SurveyResultScreen> {
                   ),
                   child: AppButton(
                     onTap: () async {
-                      await surveyCubit.saveWater(waterGoal.value);
+                      await surveyCubit.saveWater(
+                        waterGoal.value,
+                      );
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
