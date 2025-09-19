@@ -27,11 +27,30 @@ class _MainScreenState extends State<MainScreen>
   late final TabController tabController;
   int tabIndex = 0;
 
+  // Create shared repository and cubit instances
+  final WaterRepository _sharedWaterRepository = WaterRepository();
+  late final HomeCubit _homeCubit;
+  late final HistoryCubit _historyCubit;
+
   @override
   void initState() {
     super.initState();
 
     tabController = TabController(length: MainTab.values.length, vsync: this);
+
+    // Create cubit instances once
+    _homeCubit = HomeCubit(waterRepository: _sharedWaterRepository);
+    _historyCubit = HistoryCubit();
+
+    // Load initial data
+    _homeCubit.getWater();
+  }
+
+  @override
+  void dispose() {
+    _homeCubit.close();
+    _historyCubit.close();
+    super.dispose();
   }
 
   void onTabChanged(int index) {
@@ -44,43 +63,35 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: Column(
-          children: [
-            Expanded(
-              child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: tabController,
-                  children: [
-                    MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) =>
-                              HomeCubit(waterRepository: WaterRepository()),
-                        ),
-                        BlocProvider(
-                          create: (context) => HistoryCubit(),
-                        ),
-                      ],
-                      child: const HomeScreen(),
-                    ),
-                    BlocProvider(
-                      create: (context) => HistoryCubit(),
-                      child: const HistoryScreen(),
-                    ),
-                    BlocProvider(
-                      create: (context) => ReportCubit(),
-                      child: const ReportScreen(),
-                    ),
-                    const SettingScreen(),
-                  ]),
-            ),
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _homeCubit),
+        BlocProvider.value(value: _historyCubit),
+      ],
+      child: Scaffold(
+        body: SafeArea(
+          top: false,
+          child: Column(
+            children: [
+              Expanded(
+                child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: tabController,
+                    children: [
+                      const HomeScreen(),
+                      const HistoryScreen(),
+                      BlocProvider(
+                        create: (context) => ReportCubit(),
+                        child: const ReportScreen(),
+                      ),
+                      const SettingScreen(),
+                    ]),
+              ),
+            ],
+          ),
         ),
+        bottomNavigationBar: navBar(),
       ),
-      bottomNavigationBar: navBar(),
     );
   }
 

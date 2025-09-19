@@ -77,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             WaterGauges(),
             const Gap(16),
             HomeHistory(),
+            const Gap(30),
           ],
         ),
       ),

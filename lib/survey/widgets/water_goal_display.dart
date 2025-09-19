@@ -9,15 +9,23 @@ import '../../core/enum/app_enum.dart';
 class WaterGoalDisplay extends StatelessWidget {
   final double waterGoal;
   final WaterUnit selectedUnit;
+  final CupSize? selectedCupSize; // Add this parameter
 
   const WaterGoalDisplay({
     super.key,
     required this.waterGoal,
     required this.selectedUnit,
+    this.selectedCupSize, // Make it optional
   });
 
-  String _getCupImagePath(double goalMl) {
-    final primaryCup = CupSize.getPrimaryCup(goalMl);
+  String _getCupImagePath() {
+    // Use selected cup size if provided, otherwise fall back to primary cup
+    if (selectedCupSize != null) {
+      return selectedCupSize!.imagePath;
+    }
+
+    // Fallback to primary cup based on goal
+    final primaryCup = CupSize.getPrimaryCup(waterGoal);
     return primaryCup.imagePath;
   }
 
@@ -29,9 +37,9 @@ class WaterGoalDisplay extends StatelessWidget {
 
     return Column(
       children: [
-        // Water Glass - Dynamic based on goal
+        // Water Glass - Use selected cup size or fallback to primary
         Image.asset(
-          _getCupImagePath(waterGoal),
+          _getCupImagePath(),
           width: 120,
           height: 160,
           fit: BoxFit.cover,
