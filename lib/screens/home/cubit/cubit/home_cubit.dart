@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:water_tracking/domain/entity/history_entity.dart';
+import 'package:water_tracking/domain/repository/history_repository.dart';
 
 import '../../../../core/enum/app_enum.dart';
 import '../../../../domain/entity/water_entity.dart';
@@ -11,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(const HomeState());
 
   final WaterRepository waterRepository = WaterRepository();
+  final HistoryRepository historyRepository = HistoryRepository();
 
   /// Load the latest daily water entry (from survey or last session)
   Future<void> getWater() async {
@@ -46,12 +49,28 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(cupSize: cupSize));
   }
 
-  /// Add water to today’s total
+  /// Add water to today's total
   Future<void> addWater(int volumeMl) async {
     try {
       final current = state.water;
       if (current == null) return;
 
+      final now = DateTime.now();
+
+      // Create a new drink entry
+      final drinkEntry = HistoryEntity(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        createdAt: now,
+        volumeMl: volumeMl,
+        date: now,
+        cupSize: current.cupSize,
+        typeDrink: current.typeDrink,
+      );
+
+      // Save the drink entry
+      await historyRepository.save(drinkEntry);
+
+      // Update the total water for the day
       final updated = current.copyWith(
         totalWaterMl: current.totalWaterMl + volumeMl,
       );
@@ -72,7 +91,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  /// Reset today’s progress back to zero
+  /// Reset today's progress back to zero
   Future<void> resetToday() async {
     try {
       final current = state.water;
@@ -95,4 +114,3 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 }
-

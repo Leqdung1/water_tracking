@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:water_tracking/screens/history/cubit/history_cubit.dart';
 import '../../../core/constants/app_theme_const.dart';
 
 class TabViewCalendar extends StatefulWidget {
@@ -18,6 +19,8 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
   void initState() {
     super.initState();
     _selectedDay = DateTime.now();
+    // Load today's data initially
+    context.read<HistoryCubit>().getDrinkEntriesForDate(_selectedDay!);
   }
 
   @override
@@ -32,7 +35,6 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
     );
   }
 
-  // ------------------------------- Week Calendar ------------------------------- //
   Widget _buildWeekCalendar() {
     return TableCalendar(
       firstDay: DateTime.utc(2010, 10, 16),
@@ -49,6 +51,8 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
           _selectedDay = selectedDay;
           _focusedDay = focusedDay;
         });
+        // Load data for the selected day
+        context.read<HistoryCubit>().getDrinkEntriesForDate(selectedDay);
       },
       onPageChanged: (focusedDay) {
         setState(() {
@@ -61,7 +65,7 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
           shape: BoxShape.circle,
         ),
         todayDecoration: BoxDecoration(
-          color: AppThemeConst.primaryColor.withOpacity(0.5),
+          color: AppThemeConst.primaryColor.withValues(alpha: 0.5),
           shape: BoxShape.circle,
         ),
         defaultDecoration: BoxDecoration(
@@ -69,8 +73,5 @@ class _TabViewCalendarState extends State<TabViewCalendar> {
         ),
       ),
     );
-
-    
   }
-
 }

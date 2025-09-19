@@ -9,7 +9,6 @@ import 'dart:math' as math;
 
 import '../../../core/constants/app_theme_const.dart';
 import '../../../core/enum/app_enum.dart';
-import '../../../i18n/strings.g.dart';
 import '../cubit/cubit/home_cubit.dart';
 
 class WaterGauges extends StatelessWidget {
@@ -17,11 +16,17 @@ class WaterGauges extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progress = 32;
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         final water = state.water;
         final targetWaterMl = water?.targetWaterMl ?? 0;
+        final currentWaterMl = water?.totalWaterMl ?? 0;
+        final cupSize = water?.cupSize ?? CupSize.cup100;
+
+        // Calculate progress percentage
+        final progress = targetWaterMl > 0
+            ? (currentWaterMl / targetWaterMl * 100).clamp(0, 100).toDouble()
+            : 0.0;
 
         return Container(
           decoration: BoxDecoration(
@@ -31,47 +36,57 @@ class WaterGauges extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildWaterGauge(),
               const Gap(24),
+              // Progress indicator
               DropletProgress(
-                progressPercent: progress.toDouble(),
-                size: 260,
+                progressPercent: progress,
+                size: 200,
               ),
+              const Gap(24),
+              // Display current water intake vs target
               RichText(
-                  text: TextSpan(children: [
-                TextSpan(text: " 0 mL", style: context.textTheme.largeTitle),
-                TextSpan(
-                    text: " / ${targetWaterMl.toInt()} mL",
-                    style: context.textTheme.bodyMedium),
-              ])),
-              Gap(12),
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${currentWaterMl.toInt()} mL",
+                      style: context.textTheme.largeTitle!.copyWith(
+                        color: AppThemeConst.neutralColor1,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    TextSpan(
+                      text: " / ${targetWaterMl.toInt()} mL",
+                      style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppThemeConst.neutralColor2,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Gap(24),
+              // Action buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppButton(
                     onTap: () {
-                      // TODO: call cubit to add water
+                      // Add water when drink button is pressed
+                      final homeCubit = context.read<HomeCubit>();
+                      homeCubit.addWater(cupSize.volume);
                     },
-                    title: t.core.drink_n_mL(
-                      n: state.water?.cupSize?.volume ?? 0,
-                    ),
+                    title: "Drink (${cupSize.volume} mL)",
                   ),
+                  const Gap(16),
                   CupType(),
                 ],
               ),
+              const Gap(24),
             ],
           ),
         );
       },
-    );
-  }
-
-  Widget _buildWaterGauge() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.red,
-        borderRadius: BorderRadius.circular(16),
-      ),
     );
   }
 }
