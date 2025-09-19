@@ -14,8 +14,11 @@ class CupType extends StatelessWidget {
       builder: (context, state) {
         final cupSize = state.water?.cupSize;
         return GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/switch_cup_size');
+          onTap: () async {
+            // Navigate to switch cup size screen and wait for result
+            await Navigator.pushNamed(context, '/switch_cup_size');
+            // Refresh home screen data when returning
+            context.read<HomeCubit>().getWater();
           },
           child: Stack(
             clipBehavior: Clip.none,

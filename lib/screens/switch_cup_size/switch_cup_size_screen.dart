@@ -6,29 +6,21 @@ import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/screens/switch_cup_size/cubit/cubit/switch_cup_size_cubit.dart';
 import 'package:water_tracking/screens/switch_cup_size/widgets/list_type_drink.dart';
 import 'package:water_tracking/screens/switch_cup_size/widgets/list_volume_glass.dart';
+import 'package:water_tracking/domain/repository/water_repository.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../i18n/strings.g.dart';
 
-class SwitchCupSizeScreen extends StatefulWidget {
+class SwitchCupSizeScreen extends StatelessWidget {
   const SwitchCupSizeScreen({super.key});
-
-  @override
-  State<SwitchCupSizeScreen> createState() => _SwitchCupSizeScreenState();
-}
-
-class _SwitchCupSizeScreenState extends State<SwitchCupSizeScreen> {
-  late final SwitchCupSizeCubit cubit;
-  @override
-  void initState() {
-    super.initState();
-    cubit = context.read<SwitchCupSizeCubit>();
-    cubit.getWater();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SwitchCupSizeCubit(),
+      create: (context) {
+        final cubit = SwitchCupSizeCubit(waterRepository: WaterRepository());
+        cubit.getWater();
+        return cubit;
+      },
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_tracking/screens/switch_cup_size/widgets/item_drink.dart';
 
 import '../../../core/enum/app_enum.dart';
-import '../../home/home_screen.dart';
 import '../cubit/cubit/switch_cup_size_cubit.dart';
 
 class ListVolumeGlass extends StatefulWidget {
@@ -43,13 +42,6 @@ class _ListVolumeGlassState extends State<ListVolumeGlass> {
               name: cupSize.name,
               onTap: () async {
                 await cubit.changeCupSize(cupSize);
-                if (context.mounted) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/main',
-                    (route) => false,
-                    arguments: HomeScreen(),
-                  );
-                }
               },
             );
           },

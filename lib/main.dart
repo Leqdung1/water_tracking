@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:water_tracking/core/constants/app_theme_const.dart';
 import 'package:water_tracking/core/observer/bloc_observer.dart';
 import 'package:water_tracking/data/local/hive/hive_init.dart';
+import 'package:water_tracking/domain/repository/water_repository.dart';
 import 'package:water_tracking/i18n/strings.g.dart';
 import 'package:water_tracking/screens/history/history_screen.dart';
 import 'package:water_tracking/screens/home/cubit/cubit/home_cubit.dart';
@@ -22,6 +23,9 @@ import 'package:water_tracking/screens/switch_cup_size/switch_cup_size_screen.da
 import 'package:water_tracking/survey/cubit/survey_cubit.dart';
 import 'package:water_tracking/survey/survey_result_screen.dart';
 import 'package:water_tracking/survey/survey_screen.dart';
+
+// Create a shared repository instance
+final WaterRepository _sharedWaterRepository = WaterRepository();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,14 +69,16 @@ class MyApp extends StatelessWidget {
                 child: const RegisterScreen(),
               ),
           '/home': (context) => BlocProvider(
-                create: (context) => HomeCubit(),
+                create: (context) =>
+                    HomeCubit(waterRepository: _sharedWaterRepository),
                 child: const HomeScreen(),
               ),
           '/history': (context) => const HistoryScreen(),
           '/report': (context) => const ReportScreen(),
           '/setting': (context) => const SettingScreen(),
           '/switch_cup_size': (context) => BlocProvider(
-                create: (context) => SwitchCupSizeCubit(),
+                create: (context) =>
+                    SwitchCupSizeCubit(waterRepository: _sharedWaterRepository),
                 child: const SwitchCupSizeScreen(),
               ),
           '/survey_result': (context) => const SurveyResultScreen(),

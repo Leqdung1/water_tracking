@@ -94,16 +94,27 @@ enum Gender {
       };
 }
 
+@HiveType(typeId: 4)
 enum TypeDrink {
+  @HiveField(0)
   beer,
+  @HiveField(1)
   carbon,
+  @HiveField(2)
   coconute,
+  @HiveField(3)
   coffee,
+  @HiveField(4)
   juice,
+  @HiveField(5)
   liquor,
+  @HiveField(6)
   smoothie,
+  @HiveField(7)
   soda,
+  @HiveField(8)
   tea,
+  @HiveField(9)
   wine;
 
   String get imagePath => switch (this) {

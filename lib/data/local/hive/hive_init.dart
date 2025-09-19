@@ -15,6 +15,7 @@ class HiveInit {
   static Future<void> registerAdapters() async {
     Hive.registerAdapter(WaterEntityAdapter());
     Hive.registerAdapter(CupSizeAdapter());
+    Hive.registerAdapter(TypeDrinkAdapter());
     Hive.registerAdapter(HistoryEntityAdapter());
   }
 

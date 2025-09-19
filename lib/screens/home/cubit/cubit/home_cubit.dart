@@ -10,9 +10,11 @@ import '../../../../domain/repository/water_repository.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const HomeState());
+  HomeCubit({WaterRepository? waterRepository})
+      : waterRepository = waterRepository ?? WaterRepository(),
+        super(const HomeState());
 
-  final WaterRepository waterRepository = WaterRepository();
+  final WaterRepository waterRepository;
   final HistoryRepository historyRepository = HistoryRepository();
 
   /// Load the latest daily water entry (from survey or last session)
@@ -29,11 +31,38 @@ class HomeCubit extends Cubit<HomeState> {
         return;
       }
 
-      final latest = waterList.last;
-      emit(state.copyWith(
-        status: BlocStatus.success,
-        water: latest,
-      ));
+      final now = DateTime.now();
+
+      // Find today's water entry
+      WaterEntity? todayWater = waterList.where((water) {
+        return _isSameDay(water.createdAt, now);
+      }).firstOrNull;
+
+      if (todayWater == null) {
+        // No entry for today, create a new one based on the latest entry
+        final latest = waterList.last;
+        final newTodayWater = WaterEntity(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          createdAt: now,
+          totalWaterMl: 0, // Start fresh for the new day
+          targetWaterMl: latest.targetWaterMl, // Keep the same goal
+          cupSize: latest.cupSize, // Keep the same cup size
+          typeDrink: latest.typeDrink, // Keep the same drink type
+        );
+
+        await waterRepository.save(newTodayWater);
+
+        emit(state.copyWith(
+          status: BlocStatus.success,
+          water: newTodayWater,
+        ));
+      } else {
+        // Today's entry exists, use it (don't reset!)
+        emit(state.copyWith(
+          status: BlocStatus.success,
+          water: todayWater,
+        ));
+      }
     } catch (e) {
       emit(
         state.copyWith(
@@ -112,5 +141,12 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     }
+  }
+
+  /// Helper method to check if two dates are the same day
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 }

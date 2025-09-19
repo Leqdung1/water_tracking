@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
+import 'package:water_tracking/domain/repository/water_repository.dart';
 import 'package:water_tracking/screens/history/cubit/history_cubit.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
@@ -52,8 +53,16 @@ class _MainScreenState extends State<MainScreen>
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
-                    BlocProvider(
-                      create: (context) => HomeCubit(),
+                    MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (context) =>
+                              HomeCubit(waterRepository: WaterRepository()),
+                        ),
+                        BlocProvider(
+                          create: (context) => HistoryCubit(),
+                        ),
+                      ],
                       child: const HomeScreen(),
                     ),
                     BlocProvider(

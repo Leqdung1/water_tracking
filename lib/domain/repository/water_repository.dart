@@ -4,7 +4,7 @@ import 'package:water_tracking/domain/entity/water_entity.dart';
 import '../../core/constants/box_const.dart';
 
 class WaterRepository {
-  final Box<WaterEntity> waterBox = Hive.box<WaterEntity>(BoxConst.water);
+  Box<WaterEntity> get waterBox => Hive.box<WaterEntity>(BoxConst.water);
 
   Future<void> save(WaterEntity water) async {
     await waterBox.add(water);
@@ -26,7 +26,7 @@ class WaterRepository {
     try {
       return waterBox.values.toList();
     } catch (e) {
-      print(e);
+      print('Error getting all water entities: $e');
       return [];
     }
   }

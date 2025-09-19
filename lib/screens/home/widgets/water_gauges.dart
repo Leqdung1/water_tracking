@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/screens/home/widgets/cup_type.dart';
+import 'package:water_tracking/screens/history/cubit/history_cubit.dart';
 import 'package:water_tracking/widgets/button/app_button.dart';
 import 'dart:math' as math;
 
@@ -71,10 +72,16 @@ class WaterGauges extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppButton(
-                    onTap: () {
+                    onTap: () async {
                       // Add water when drink button is pressed
                       final homeCubit = context.read<HomeCubit>();
-                      homeCubit.addWater(cupSize.volume);
+                      final historyCubit = context.read<HistoryCubit>();
+
+                      // Add water and wait for it to complete
+                      await homeCubit.addWater(cupSize.volume);
+
+                      // Refresh history data to show the new entry
+                      historyCubit.getDrinkEntriesForDate(DateTime.now());
                     },
                     title: "Drink (${cupSize.volume} mL)",
                   ),

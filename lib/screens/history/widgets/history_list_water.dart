@@ -118,18 +118,22 @@ class HistoryListWater extends StatelessWidget {
     bool isPm = entry.createdAt.hour >= 12;
     final String timeFormat = isPm ? "PM" : "AM";
 
-    // Get the appropriate icon based on drink type or cup size
+    // Get the appropriate icon and title based on what was selected
     String iconPath;
     String title;
 
-    if (entry.typeDrink != null) {
+    // Priority: If drink type is selected, use it; otherwise use cup size
+    if (entry.typeDrink != null && entry.typeDrink != TypeDrink.tea) {
+      // User selected a specific drink type (not just water)
       iconPath = entry.typeDrink!.imagePath;
       title = entry.typeDrink!.name;
     } else if (entry.cupSize != null) {
+      // User selected a cup size (default to water with cup size)
       iconPath = entry.cupSize!.imagePath;
-      title = "Water";
+      title = "Water (${entry.cupSize!.volume} mL)";
     } else {
-      iconPath = AssetPathConst.imgCup100; // Default
+      // Fallback
+      iconPath = AssetPathConst.imgCup100;
       title = "Water";
     }
 
