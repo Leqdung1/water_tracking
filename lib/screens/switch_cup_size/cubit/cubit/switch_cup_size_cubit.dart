@@ -28,8 +28,12 @@ class SwitchCupSizeCubit extends Cubit<SwitchCupSizeState> {
   }
 
   Future<void> getWater() async {
-    final water = await waterRepository?.getAll();
-    emit(state.copyWith(water: water?.last));
+    try {
+      final water = await waterRepository?.getAll();
+      emit(state.copyWith(water: water?.last));
+    } catch (e) {
+      emit(state.copyWith(status: BlocStatus.error, message: e.toString()));
+    }
   }
 
   Future<void> saveCupSize(CupSize cupSize) async {

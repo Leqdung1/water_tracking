@@ -23,6 +23,11 @@ class WaterRepository {
   }
 
   Future<List<WaterEntity>> getAll() async {
-    return waterBox.values.toList();
+    try {
+      return waterBox.values.toList();
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 }
