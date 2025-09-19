@@ -5,6 +5,7 @@ import 'package:water_tracking/core/extensions/theme_extension.dart';
 import 'package:water_tracking/core/style/text_style.dart';
 import 'package:water_tracking/domain/repository/water_repository.dart';
 import 'package:water_tracking/screens/history/cubit/history_cubit.dart';
+import 'package:water_tracking/screens/report/cubit/report_cubit.dart';
 import '../../core/constants/app_theme_const.dart';
 import '../../core/enum/app_enum.dart';
 import '../../i18n/strings.g.dart';
@@ -69,7 +70,10 @@ class _MainScreenState extends State<MainScreen>
                       create: (context) => HistoryCubit(),
                       child: const HistoryScreen(),
                     ),
-                    const ReportScreen(),
+                    BlocProvider(
+                      create: (context) => ReportCubit(),
+                      child: const ReportScreen(),
+                    ),
                     const SettingScreen(),
                   ]),
             ),
